@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0109)file:///Users/miso/Little%20Lights%20Studio%20Dropbox/Michael%20Sokolar/Mac/Downloads/oneirium-sandbox_6.html -->
+<!-- saved from url=(0109)file:///Users/miso/Little%20Lights%20Studio%20Dropbox/Michael%20Sokolar/Mac/Downloads/oneirium-sandbox_7.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,404 +8,362 @@
 <link href="./index_files/css2" rel="stylesheet">
 <style>
 :root {
-  --bg:#1e1b3a; --bg2:#252248;
-  --teal:#2db89a; --teal-pale:#7ee8d0;
+  --bg:#1e1b3a; --teal:#2db89a; --teal-pale:#7ee8d0;
   --copper:#b87333; --copper-lt:#d4944a;
   --purple-br:#9b59d8; --purple-lt:#c084f5;
   --parchment:#f0e8d8; --parchment2:#c8bfa8; --smoke:#8a7a9a;
   --border:rgba(45,184,154,0.22); --border-str:rgba(45,184,154,0.5);
-  --c-tension-bg:rgba(200,50,50,0.2);   --c-tension:#e07070;
-  --c-resolve-bg:rgba(60,160,90,0.2);   --c-resolve:#6cd890;
-  --c-warmth-bg:rgba(200,140,50,0.2);   --c-warmth:#e0aa60;
-  --c-motion-bg:rgba(150,90,200,0.2);   --c-motion:#c084f5;
-  --c-still-bg:rgba(60,160,220,0.2);    --c-still:#70c8f0;
-  --c-struct-bg:rgba(100,120,140,0.2);  --c-struct:#9aacbc;
-  --c-other-bg:rgba(60,170,140,0.2);    --c-other:#6ad8b8;
-  /* CT zone colors */
-  --ct-stable:#2db89a;
-  --ct-unstable:#d4944a;
-  --ct-critical:#e05555;
-  --ct-collapse:#8b0000;
+  --ct-stable:#2db89a; --ct-unstable:#d4944a; --ct-critical:#e05555;
+  /* tag family colors */
+  --c-tension:#e07070; --c-tension-bg:rgba(200,50,50,0.2);
+  --c-resolve:#6cd890; --c-resolve-bg:rgba(60,160,90,0.2);
+  --c-warmth:#e0aa60;  --c-warmth-bg:rgba(200,140,50,0.2);
+  --c-motion:#c084f5;  --c-motion-bg:rgba(150,90,200,0.2);
+  --c-still:#70c8f0;   --c-still-bg:rgba(60,160,220,0.2);
+  --c-struct:#9aacbc;  --c-struct-bg:rgba(100,120,140,0.2);
+  --c-other:#6ad8b8;   --c-other-bg:rgba(60,170,140,0.2);
+  /* card category backgrounds */
+  --card-emotion:   rgba(155,89,216,0.13);
+  --card-character: rgba(45,184,154,0.1);
+  --card-setting:   rgba(30,100,160,0.15);
+  --card-situation: rgba(180,115,51,0.12);
+  --card-object:    rgba(60,130,80,0.12);
+  --card-resolution:rgba(45,184,154,0.18);
+  --card-disturbance:rgba(180,40,40,0.18);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--parchment);min-height:100vh;background-image:radial-gradient(ellipse at 15% 10%,rgba(45,184,154,0.06) 0%,transparent 50%),radial-gradient(ellipse at 85% 90%,rgba(155,89,216,0.08) 0%,transparent 50%)}
-.header{text-align:center;padding:1.3rem 1rem 1rem;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(45,184,154,0.07) 0%,transparent 100%)}
-.header-orn{font-family:'Cinzel',serif;font-size:.62rem;color:var(--teal);letter-spacing:.55em;opacity:.55;margin-bottom:.3rem}
+body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--parchment);min-height:100vh;
+  background-image:radial-gradient(ellipse at 15% 10%,rgba(45,184,154,0.06) 0%,transparent 50%),
+                   radial-gradient(ellipse at 85% 90%,rgba(155,89,216,0.08) 0%,transparent 50%)}
+
+/* ── HEADER ── */
+.header{text-align:center;padding:1.2rem 1rem .9rem;border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(45,184,154,0.07) 0%,transparent 100%)}
+.header-orn{font-family:'Cinzel',serif;font-size:.6rem;color:var(--teal);letter-spacing:.55em;opacity:.5;margin-bottom:.3rem}
 .header h1{font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,1.75rem);font-weight:500;color:var(--teal-pale);letter-spacing:.1em;text-transform:uppercase}
-.header p{font-size:.85rem;color:var(--smoke);font-style:italic;margin-top:.2rem}
+.header-sub{font-size:.85rem;color:var(--smoke);font-style:italic;margin-top:.25rem;display:flex;align-items:center;justify-content:center;gap:.75rem;flex-wrap:wrap}
+.help-btn{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 14px;border-radius:7px;border:1px solid rgba(155,89,216,0.45);background:transparent;
+  color:var(--purple-lt);cursor:pointer;transition:all .15s}
+.help-btn:hover{background:rgba(155,89,216,0.12);border-color:var(--purple-lt)}
+
 .main{max-width:1400px;margin:0 auto;padding:1rem}
 
-/* ── SCORE + CT BAR ── */
+/* ── SCORE + CT ── */
 .top-row{display:grid;grid-template-columns:1fr auto;gap:12px;margin-bottom:1rem;align-items:start}
 .score-bar{display:grid;grid-template-columns:repeat(5,1fr) 2fr;gap:7px}
 .sc{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:8px 10px;text-align:center}
 .sc.total{background:rgba(45,184,154,0.1);border-color:var(--border-str)}
-.sc .lbl{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);margin-bottom:3px}
+.sc .lbl{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);margin-bottom:3px}
 .sc .val{font-family:'Cinzel',serif;font-size:1.4rem;font-weight:600;color:var(--parchment)}
 .sc.total .val{color:var(--teal-pale)}
-.sc-detail{grid-column:1/-1;display:flex;align-items:center;flex-wrap:wrap;gap:5px;padding:7px 11px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;font-size:.72rem;color:var(--smoke);font-style:italic;margin-top:0}
+.sc-detail{grid-column:1/-1;display:flex;align-items:center;flex-wrap:wrap;gap:5px;padding:7px 11px;
+  background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;font-size:.72rem;color:var(--smoke);font-style:italic}
 .sc-detail span{color:var(--teal-pale);font-style:normal;font-weight:500}
 
 /* ── CT PANEL ── */
-.ct-panel{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:12px 14px;min-width:170px;display:flex;flex-direction:column;gap:8px}
-.ct-label{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);opacity:.75;margin-bottom:2px}
-.ct-value-row{display:flex;align-items:baseline;gap:6px}
-.ct-number{font-family:'Cinzel',serif;font-size:2.2rem;font-weight:600;line-height:1;transition:color .3s}
-.ct-max{font-family:'Cinzel',serif;font-size:.75rem;color:var(--smoke)}
-.ct-track{display:flex;gap:2px;height:8px;margin:2px 0}
+.ct-panel{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;
+  padding:11px 13px;min-width:165px;display:flex;flex-direction:column;gap:7px}
+.ct-label{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);opacity:.72}
+.ct-val-row{display:flex;align-items:baseline;gap:5px}
+.ct-num{font-family:'Cinzel',serif;font-size:2.1rem;font-weight:600;line-height:1;transition:color .3s}
+.ct-max-lbl{font-family:'Cinzel',serif;font-size:.72rem;color:var(--smoke)}
+.ct-track{display:flex;gap:2px;height:7px}
 .ct-pip{flex:1;border-radius:2px;transition:background .3s}
-.ct-zone-badge{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;font-weight:500;text-align:center;transition:all .3s}
-.ct-zone-stable  {background:rgba(45,184,154,0.18);color:var(--ct-stable);border:1px solid rgba(45,184,154,0.4)}
-.ct-zone-unstable{background:rgba(212,148,74,0.18);color:var(--ct-unstable);border:1px solid rgba(212,148,74,0.4)}
-.ct-zone-critical{background:rgba(224,85,85,0.18);color:var(--ct-critical);border:1px solid rgba(224,85,85,0.4)}
-.ct-zone-collapse{background:rgba(139,0,0,0.35);color:#ff6666;border:1px solid rgba(200,0,0,0.6)}
-.ct-effects{font-size:.68rem;color:var(--smoke);font-style:italic;line-height:1.5;min-height:2.2em}
-.ct-restore-btn{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:6px;border:1px solid rgba(45,184,154,0.35);background:transparent;color:var(--teal-pale);cursor:pointer;transition:all .15s;opacity:.7}
-.ct-restore-btn:hover{background:rgba(45,184,154,0.12);opacity:1}
+.ct-badge{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 9px;border-radius:20px;font-weight:500;text-align:center;transition:all .3s}
+.ct-stable  {background:rgba(45,184,154,0.16);color:var(--ct-stable);border:1px solid rgba(45,184,154,0.38)}
+.ct-unstable{background:rgba(212,148,74,0.16);color:var(--ct-unstable);border:1px solid rgba(212,148,74,0.38)}
+.ct-critical{background:rgba(224,85,85,0.16);color:var(--ct-critical);border:1px solid rgba(224,85,85,0.38)}
+.ct-collapse{background:rgba(139,0,0,0.3);color:#ff6666;border:1px solid rgba(200,0,0,0.5)}
+.ct-effects{font-size:.66rem;color:var(--smoke);font-style:italic;line-height:1.5;min-height:2em}
+.ct-restore{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 10px;border-radius:6px;border:1px solid rgba(45,184,154,0.32);background:transparent;
+  color:var(--teal-pale);cursor:pointer;transition:all .15s;opacity:.65}
+.ct-restore:hover{background:rgba(45,184,154,0.1);opacity:1}
 
-/* ── COLLAPSE OVERLAY ── */
-.collapse-overlay{display:none;position:fixed;inset:0;background:rgba(10,5,20,0.88);z-index:100;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem}
-.collapse-overlay.active{display:flex}
-.collapse-title{font-family:'Cinzel',serif;font-size:2rem;color:#ff4444;letter-spacing:.15em;text-transform:uppercase}
-.collapse-sub{font-size:1rem;color:var(--parchment2);font-style:italic}
-.collapse-btn{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;padding:10px 28px;border-radius:8px;border:1px solid var(--copper);background:transparent;color:var(--copper-lt);cursor:pointer;transition:all .15s}
-.collapse-btn:hover{background:rgba(184,115,51,0.15)}
+/* ── COLLAPSE ── */
+.collapse-ov{display:none;position:fixed;inset:0;background:rgba(8,4,20,0.9);z-index:300;
+  align-items:center;justify-content:center;flex-direction:column;gap:1.4rem}
+.collapse-ov.active{display:flex}
+.collapse-title{font-family:'Cinzel',serif;font-size:1.9rem;color:#ff4444;letter-spacing:.14em;text-transform:uppercase}
+.collapse-sub{font-size:.95rem;color:var(--parchment2);font-style:italic}
+.collapse-btn{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:9px 26px;border-radius:8px;border:1px solid var(--copper);background:transparent;color:var(--copper-lt);cursor:pointer}
+.collapse-btn:hover{background:rgba(184,115,51,0.14)}
 
 /* ── SECTIONS ── */
-.section{border-radius:12px;padding:.9rem 1rem;margin-bottom:.85rem}
-.section.arc-sec{background:rgba(255,255,255,0.03);border:1px solid var(--border)}
-.section.deck-sec{background:rgba(45,184,154,0.04);border:1px solid var(--border-str)}
-.section.trans-sec{background:rgba(155,89,216,0.06);border:1px solid rgba(155,89,216,0.28)}
-.section.base-sec{background:rgba(255,255,255,0.02);border:1px solid var(--border)}
-.stitle{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);opacity:.72;margin-bottom:.75rem}
-.stitle.purple{color:var(--purple-lt);opacity:.8}
+.section{border-radius:12px;padding:.85rem .95rem;margin-bottom:.8rem}
+.arc-sec {background:rgba(255,255,255,0.03);border:1px solid var(--border)}
+.deck-sec{background:rgba(45,184,154,0.04);border:1px solid var(--border-str)}
+.trans-sec{background:rgba(155,89,216,0.05);border:1px solid rgba(155,89,216,0.26)}
+.base-sec{background:rgba(255,255,255,0.02);border:1px solid var(--border)}
+.stitle{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);opacity:.7;margin-bottom:.7rem}
+.stitle.pur{color:var(--purple-lt);opacity:.78}
 
 /* ── BOARD ── */
-.board-row{display:flex;gap:5px;align-items:center;flex-wrap:wrap;min-height:178px}
-.b-slot{width:134px;min-height:178px;border-radius:10px;border:1px solid var(--border-str);background:rgba(18,15,38,0.75);position:relative;cursor:pointer;transition:border-color .18s,transform .1s;flex-shrink:0;display:flex;flex-direction:column}
+.board-row{display:flex;gap:5px;align-items:center;flex-wrap:wrap;min-height:182px}
+.b-slot{width:136px;min-height:182px;border-radius:10px;border:1px solid var(--border-str);
+  position:relative;cursor:pointer;transition:border-color .18s,transform .1s;flex-shrink:0;display:flex;flex-direction:column}
 .b-slot:hover{border-color:#e07070;transform:translateY(-2px)}
 .b-slot:hover .rm{opacity:1}
-.rm{position:absolute;top:4px;right:5px;font-size:8px;color:#e07070;opacity:0;transition:opacity .15s;font-family:'Cinzel',serif}
-.b-slot.dis{border-color:rgba(200,50,50,0.5);background:rgba(40,10,10,0.7)}
-.b-slot.dis:hover{border-color:#e05555}
-.add-slot{width:48px;min-height:178px;border-radius:10px;border:1.5px dashed rgba(45,184,154,0.18);display:flex;align-items:center;justify-content:center;color:rgba(45,184,154,0.22);font-size:1.4rem;flex-shrink:0;transition:all .18s}
-.add-slot.hot{border-color:var(--teal);color:var(--teal);background:rgba(45,184,154,0.07)}
-.arr{color:rgba(45,184,154,0.22);font-size:.8rem;flex-shrink:0;padding:0 1px}
-.hints-row{min-height:24px;margin-top:.65rem;display:flex;flex-wrap:wrap;gap:4px}
-.ht{font-size:.7rem;background:rgba(155,89,216,0.17);border:1px solid rgba(155,89,216,0.38);color:var(--purple-lt);padding:2px 9px;border-radius:20px;font-style:italic}
-.hs{font-size:.7rem;background:rgba(45,184,154,0.13);border:1px solid rgba(45,184,154,0.3);color:var(--teal-pale);padding:2px 9px;border-radius:20px;font-style:italic}
-.ha{font-size:.7rem;background:rgba(184,115,51,0.17);border:1px solid rgba(184,115,51,0.4);color:var(--copper-lt);padding:2px 9px;border-radius:20px;font-style:italic;font-weight:500}
+.rm{position:absolute;top:4px;right:5px;font-size:7.5px;color:#e07070;opacity:0;transition:opacity .15s;font-family:'Cinzel',serif}
+.add-slot{width:46px;min-height:182px;border-radius:10px;border:1.5px dashed rgba(45,184,154,0.16);
+  display:flex;align-items:center;justify-content:center;color:rgba(45,184,154,0.2);font-size:1.3rem;
+  flex-shrink:0;transition:all .18s}
+.add-slot.hot{border-color:var(--teal);color:var(--teal);background:rgba(45,184,154,0.06)}
+.arr{color:rgba(45,184,154,0.2);font-size:.78rem;flex-shrink:0;padding:0 1px}
+.hints-row{min-height:22px;margin-top:.6rem;display:flex;flex-wrap:wrap;gap:4px}
+.ht{font-size:.68rem;background:rgba(155,89,216,0.16);border:1px solid rgba(155,89,216,0.36);color:var(--purple-lt);padding:2px 8px;border-radius:20px;font-style:italic}
+.hs{font-size:.68rem;background:rgba(45,184,154,0.12);border:1px solid rgba(45,184,154,0.28);color:var(--teal-pale);padding:2px 8px;border-radius:20px;font-style:italic}
+.ha{font-size:.68rem;background:rgba(184,115,51,0.16);border:1px solid rgba(184,115,51,0.38);color:var(--copper-lt);padding:2px 8px;border-radius:20px;font-style:italic;font-weight:500}
 
-/* ── CARD ── */
-.ci{padding:8px 9px;display:flex;flex-direction:column;justify-content:space-between;height:100%;min-height:178px}
-.ci-type{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);margin-bottom:3px;opacity:.7}
-.ci-name{font-size:11.5px;font-weight:500;color:var(--parchment);line-height:1.25;margin-bottom:4px}
-.ci-action{font-size:9px;color:var(--parchment2);font-style:italic;line-height:1.4;margin-bottom:4px;opacity:.8;border-top:1px solid rgba(255,255,255,0.07);padding-top:3px;flex:1}
-/* disturbance cards show CT drain prominently */
-.ci-ct-drain{font-family:'Cinzel',serif;font-size:10px;font-weight:600;color:#e07070;margin-bottom:3px}
+/* ── CARD INNER ── */
+.ci{padding:8px 9px;display:flex;flex-direction:column;justify-content:space-between;height:100%;min-height:182px;border-radius:10px}
+.ci-type{font-family:'Cinzel',serif;font-size:6.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);margin-bottom:3px;opacity:.68}
+.ci-name{font-size:11px;font-weight:500;color:var(--parchment);line-height:1.25;margin-bottom:3px}
+.ci-action{font-size:8.5px;color:var(--parchment2);font-style:italic;line-height:1.4;margin-bottom:3px;opacity:.78;
+  border-top:1px solid rgba(255,255,255,0.07);padding-top:3px;flex:1}
+.ci-ct{font-family:'Cinzel',serif;font-size:9.5px;font-weight:600;color:#e07070;margin-bottom:3px}
 .ci-tags{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:3px}
 .ci-footer{display:flex;justify-content:space-between}
-.ci-dp{font-family:'Cinzel',serif;font-size:7px;color:var(--copper-lt);opacity:.62;letter-spacing:.04em}
-.slot-pip{display:inline-block;width:5px;height:5px;border-radius:50%;border:1.5px solid rgba(200,120,180,0.75);margin-left:3px;vertical-align:middle}
+.ci-dp{font-family:'Cinzel',serif;font-size:7px;color:var(--copper-lt);opacity:.6;letter-spacing:.04em}
+.slot-pip{display:inline-block;width:5px;height:5px;border-radius:50%;border:1.5px solid rgba(200,120,180,0.7);margin-left:3px;vertical-align:middle}
 .tag{font-size:7.5px;font-weight:500;padding:1px 5px;border-radius:9px;font-family:'Cinzel',serif;letter-spacing:.03em;white-space:nowrap}
-.tf-tension{background:var(--c-tension-bg);color:var(--c-tension);border:1px solid rgba(200,50,50,0.35)}
-.tf-resolve{background:var(--c-resolve-bg);color:var(--c-resolve);border:1px solid rgba(60,160,90,0.35)}
-.tf-warmth{background:var(--c-warmth-bg);color:var(--c-warmth);border:1px solid rgba(200,140,50,0.35)}
-.tf-motion{background:var(--c-motion-bg);color:var(--c-motion);border:1px solid rgba(150,90,200,0.35)}
-.tf-still{background:var(--c-still-bg);color:var(--c-still);border:1px solid rgba(60,160,220,0.35)}
-.tf-struct{background:var(--c-struct-bg);color:var(--c-struct);border:1px solid rgba(100,120,140,0.35)}
-.tf-other{background:var(--c-other-bg);color:var(--c-other);border:1px solid rgba(60,170,140,0.35)}
+.tf-tension {background:var(--c-tension-bg); color:var(--c-tension); border:1px solid rgba(200,50,50,0.32)}
+.tf-resolve  {background:var(--c-resolve-bg); color:var(--c-resolve); border:1px solid rgba(60,160,90,0.32)}
+.tf-warmth   {background:var(--c-warmth-bg);  color:var(--c-warmth);  border:1px solid rgba(200,140,50,0.32)}
+.tf-motion   {background:var(--c-motion-bg);  color:var(--c-motion);  border:1px solid rgba(150,90,200,0.32)}
+.tf-still    {background:var(--c-still-bg);   color:var(--c-still);   border:1px solid rgba(60,160,220,0.32)}
+.tf-struct   {background:var(--c-struct-bg);  color:var(--c-struct);  border:1px solid rgba(100,120,140,0.32)}
+.tf-other    {background:var(--c-other-bg);   color:var(--c-other);   border:1px solid rgba(60,170,140,0.32)}
 
 /* ── CONTROLS ── */
-.ctrl-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:.75rem}
-.btn{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 15px;border-radius:7px;border:1px solid var(--border-str);background:transparent;color:var(--parchment2);cursor:pointer;transition:all .15s}
-.btn:hover{background:rgba(45,184,154,0.12);color:var(--teal-pale);border-color:var(--teal)}
+.ctrl-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:.7rem}
+.btn{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:6px 14px;border-radius:7px;border:1px solid var(--border-str);background:transparent;
+  color:var(--parchment2);cursor:pointer;transition:all .15s}
+.btn:hover{background:rgba(45,184,154,0.1);color:var(--teal-pale);border-color:var(--teal)}
 .btn.primary{border-color:var(--copper);color:var(--copper-lt)}
-.btn.primary:hover{background:rgba(184,115,51,0.13);border-color:var(--copper-lt)}
-.ctrl-info{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.08em;color:var(--smoke);text-transform:uppercase}
-.dp-wrap{display:flex;align-items:center;gap:6px;min-width:130px}
+.btn.primary:hover{background:rgba(184,115,51,0.12);border-color:var(--copper-lt)}
+.ctrl-info{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.08em;color:var(--smoke);text-transform:uppercase}
+.dp-wrap{display:flex;align-items:center;gap:6px;min-width:125px}
 .dp-bg{flex:1;height:4px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden}
 .dp-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--purple-br));border-radius:2px;transition:width .3s}
-.dp-lbl{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.06em;color:var(--copper-lt);white-space:nowrap}
-.filter-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:.75rem}
-.filter-btn{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--smoke);cursor:pointer;transition:all .15s}
-.filter-btn.active{background:rgba(45,184,154,0.12);border-color:var(--teal);color:var(--teal-pale)}
+.dp-lbl{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.06em;color:var(--copper-lt);white-space:nowrap}
+.filter-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:.7rem}
+.fbtn{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.07em;text-transform:uppercase;
+  padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--smoke);cursor:pointer;transition:all .15s}
+.fbtn.active{background:rgba(45,184,154,0.11);border-color:var(--teal);color:var(--teal-pale)}
 .card-grid{display:flex;gap:6px;flex-wrap:wrap}
-.h-card{width:134px;min-height:178px;border-radius:10px;border:1px solid rgba(45,184,154,0.18);background:rgba(18,15,42,0.88);cursor:pointer;transition:border-color .15s,transform .12s;flex-shrink:0;user-select:none}
+
+/* ── HAND CARDS ── */
+.h-card{width:136px;min-height:182px;border-radius:10px;border:1px solid rgba(45,184,154,0.15);
+  cursor:pointer;transition:border-color .15s,transform .12s;flex-shrink:0;user-select:none}
 .h-card:hover{border-color:var(--teal);transform:translateY(-3px)}
 .h-card:active{transform:scale(.96)}
-.h-card.in-arc{opacity:.2;pointer-events:none;filter:grayscale(.6)}
-.h-card.in-deck-dim{opacity:.25;pointer-events:none;filter:grayscale(.5)}
+.h-card.in-arc{opacity:.18;pointer-events:none;filter:grayscale(.6)}
+.h-card.in-deck-dim{opacity:.22;pointer-events:none;filter:grayscale(.5)}
 .h-card.hidden{display:none}
-.h-card.dis .ci-type{color:#e07070}
-.instr{font-size:.72rem;color:var(--smoke);font-style:italic;margin-bottom:.75rem;line-height:1.6;padding:6px 12px;border-left:2px solid rgba(45,184,154,0.25)}
+/* category backgrounds on cards */
+.cat-Emotion    .ci{background:var(--card-emotion)}
+.cat-Character  .ci{background:var(--card-character)}
+.cat-Setting    .ci{background:var(--card-setting)}
+.cat-Situation  .ci{background:var(--card-situation)}
+.cat-Object     .ci{background:var(--card-object)}
+.cat-Resolution .ci{background:var(--card-resolution)}
+.cat-Disturbance .ci{background:var(--card-disturbance)}
+/* also apply to board slots */
+.b-slot.cat-Emotion    {background:var(--card-emotion)}
+.b-slot.cat-Character  {background:var(--card-character)}
+.b-slot.cat-Setting    {background:var(--card-setting)}
+.b-slot.cat-Situation  {background:var(--card-situation)}
+.b-slot.cat-Object     {background:var(--card-object)}
+.b-slot.cat-Resolution {background:var(--card-resolution)}
+.b-slot.cat-Disturbance{background:var(--card-disturbance);border-color:rgba(200,50,50,0.45)}
+
+.instr{font-size:.7rem;color:var(--smoke);font-style:italic;margin-bottom:.7rem;line-height:1.58;padding:5px 11px;border-left:2px solid rgba(45,184,154,0.22)}
 .instr strong{color:var(--parchment2);font-style:normal;font-weight:500}
-.trans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px}
-.trans-row{display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(255,255,255,0.03);border-radius:7px;border:1px solid rgba(155,89,216,0.18)}
-.trans-from{font-family:'Cinzel',serif;font-size:9px;font-weight:500;color:var(--c-tension);letter-spacing:.04em}
-.trans-arrow{color:rgba(155,89,216,0.5);font-size:.9rem;flex-shrink:0}
-.trans-to{font-family:'Cinzel',serif;font-size:9px;font-weight:500;color:var(--c-resolve);letter-spacing:.04em}
-.trans-echo{font-size:8.5px;color:var(--smoke);font-style:italic;margin-left:auto;white-space:nowrap}
+
+/* ── TRANSITION REFERENCE ── */
+.trans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(198px,1fr));gap:5px}
+.tr-row{display:flex;align-items:center;gap:7px;padding:5px 9px;background:rgba(255,255,255,0.03);border-radius:6px;border:1px solid rgba(155,89,216,0.16)}
+.tr-from{font-family:'Cinzel',serif;font-size:8.5px;font-weight:500;color:var(--c-tension)}
+.tr-arr{color:rgba(155,89,216,0.45);font-size:.85rem;flex-shrink:0}
+.tr-to{font-family:'Cinzel',serif;font-size:8.5px;font-weight:500;color:var(--c-resolve)}
+.tr-echo{font-size:8px;color:var(--smoke);font-style:italic;margin-left:auto;white-space:nowrap}
+
 /* ── HELP SYSTEM ── */
-.help-btn{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border-radius:7px;border:1px solid rgba(155,89,216,0.45);background:transparent;color:var(--purple-lt);cursor:pointer;transition:all .15s}
-.help-btn:hover{background:rgba(155,89,216,0.12);border-color:var(--purple-lt)}
-.help-overlay{display:none;position:fixed;inset:0;background:rgba(10,5,25,0.85);z-index:200;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
-.help-overlay.active{display:flex}
-.help-box{background:#1e1b3a;border:1px solid rgba(155,89,216,0.4);border-radius:16px;width:100%;max-width:740px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.6)}
-.help-header{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.3rem;border-bottom:1px solid rgba(155,89,216,0.2);background:rgba(155,89,216,0.07)}
-.help-title{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.12em;text-transform:uppercase;color:var(--purple-lt)}
-.help-close{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:6px;border:1px solid rgba(155,89,216,0.35);background:transparent;color:var(--smoke);cursor:pointer;transition:all .15s}
-.help-close:hover{background:rgba(155,89,216,0.12);color:var(--purple-lt)}
-.help-tabs{display:flex;gap:0;border-bottom:1px solid rgba(155,89,216,0.2)}
-.help-tab{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;padding:9px 16px;background:transparent;color:var(--smoke);cursor:pointer;border:none;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.help-ov{display:none;position:fixed;inset:0;background:rgba(8,4,20,0.87);z-index:200;
+  align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
+.help-ov.active{display:flex}
+.help-box{background:#1e1b3a;border:1px solid rgba(155,89,216,0.38);border-radius:16px;
+  width:100%;max-width:740px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.55)}
+.help-hdr{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.2rem;
+  border-bottom:1px solid rgba(155,89,216,0.18);background:rgba(155,89,216,0.06)}
+.help-hdr-title{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--purple-lt)}
+.help-close{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 13px;border-radius:6px;border:1px solid rgba(155,89,216,0.3);background:transparent;color:var(--smoke);cursor:pointer}
+.help-close:hover{background:rgba(155,89,216,0.1);color:var(--purple-lt)}
+.help-tabs{display:flex;border-bottom:1px solid rgba(155,89,216,0.18);overflow-x:auto}
+.help-tab{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.09em;text-transform:uppercase;
+  padding:8px 14px;background:transparent;color:var(--smoke);cursor:pointer;border:none;
+  border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;flex-shrink:0}
 .help-tab:hover{color:var(--purple-lt)}
-.help-tab.active{color:var(--purple-lt);border-bottom-color:var(--purple-lt);background:rgba(155,89,216,0.06)}
-.help-body{padding:1.3rem;max-height:65vh;overflow-y:auto}
+.help-tab.active{color:var(--purple-lt);border-bottom-color:var(--purple-lt);background:rgba(155,89,216,0.05)}
+.help-body{padding:1.2rem;max-height:62vh;overflow-y:auto}
 .help-panel{display:none}
 .help-panel.active{display:block}
-.help-panel h3{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-pale);margin-bottom:.6rem;margin-top:1.1rem;opacity:.85}
+.help-panel h3{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--teal-pale);margin-bottom:.55rem;margin-top:1rem;opacity:.82}
 .help-panel h3:first-child{margin-top:0}
-.help-panel p{font-size:.88rem;color:var(--parchment2);line-height:1.7;margin-bottom:.7rem}
-.help-panel ul{list-style:none;padding:0;margin-bottom:.7rem}
-.help-panel ul li{font-size:.86rem;color:var(--parchment2);line-height:1.65;padding:3px 0 3px 1rem;position:relative}
-.help-panel ul li::before{content:'◈';position:absolute;left:0;color:var(--teal);font-size:.6rem;top:6px}
-.help-rule{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;margin-bottom:.6rem}
-.help-rule-title{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-pale);margin-bottom:.3rem}
-.help-rule-body{font-size:.84rem;color:var(--parchment2);line-height:1.6}
-.help-tag-row{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
-.help-tag-row:last-child{border-bottom:none}
-.help-tag-fam{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.07em;text-transform:uppercase;min-width:80px;color:var(--smoke)}
-.help-tag-list{font-size:.8rem;color:var(--parchment2);line-height:1.5}
-.trans-ref{display:grid;grid-template-columns:1fr 1fr;gap:5px}
-.trans-ref-row{display:flex;align-items:center;gap:6px;padding:5px 8px;background:rgba(255,255,255,0.03);border-radius:6px;border:1px solid rgba(155,89,216,0.15)}
-.tr-from{font-family:'Cinzel',serif;font-size:8px;font-weight:500;color:var(--c-tension)}
-.tr-arr{color:rgba(155,89,216,0.45);font-size:.8rem}
-.tr-to{font-family:'Cinzel',serif;font-size:8px;font-weight:500;color:var(--c-resolve)}
-.tr-echo{font-size:7.5px;color:var(--smoke);font-style:italic;margin-left:auto}
-.ornament{text-align:center;color:var(--teal);opacity:.2;font-size:.7rem;letter-spacing:.35rem;margin:.7rem 0}
-.footer{text-align:center;padding:1rem;font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(45,184,154,0.17);border-top:1px solid var(--border);margin-top:1.2rem}
+.help-panel p{font-size:.86rem;color:var(--parchment2);line-height:1.68;margin-bottom:.65rem}
+.help-panel ul{list-style:none;padding:0;margin-bottom:.65rem}
+.help-panel ul li{font-size:.84rem;color:var(--parchment2);line-height:1.62;padding:2px 0 2px 1rem;position:relative}
+.help-panel ul li::before{content:'◈';position:absolute;left:0;color:var(--teal);font-size:.58rem;top:5px}
+.h-rule{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:7px;padding:.65rem .9rem;margin-bottom:.55rem}
+.h-rule-t{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;color:var(--teal-pale);margin-bottom:.28rem}
+.h-rule-b{font-size:.82rem;color:var(--parchment2);line-height:1.58}
+.h-tag-row{display:flex;align-items:center;gap:8px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.h-tag-row:last-child{border-bottom:none}
+.h-tag-fam{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.07em;text-transform:uppercase;min-width:76px;color:var(--smoke)}
+.h-tag-list{font-size:.78rem;color:var(--parchment2);line-height:1.45}
+.h-trans-ref{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.h-tr-row{display:flex;align-items:center;gap:5px;padding:4px 7px;background:rgba(255,255,255,0.03);
+  border-radius:5px;border:1px solid rgba(155,89,216,0.14)}
+.h-tr-f{font-family:'Cinzel',serif;font-size:8px;font-weight:500;color:var(--c-tension)}
+.h-tr-a{color:rgba(155,89,216,0.42);font-size:.8rem}
+.h-tr-t{font-family:'Cinzel',serif;font-size:8px;font-weight:500;color:var(--c-resolve)}
+.h-tr-e{font-size:7px;color:var(--smoke);font-style:italic;margin-left:auto}
+/* cat color swatches in help */
+.cat-swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle}
+
+.ornament{text-align:center;color:var(--teal);opacity:.18;font-size:.68rem;letter-spacing:.33rem;margin:.65rem 0}
+.footer{text-align:center;padding:.9rem;font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.13em;
+  text-transform:uppercase;color:rgba(45,184,154,0.15);border-top:1px solid var(--border);margin-top:1.1rem}
 @media(max-width:700px){
   .top-row{grid-template-columns:1fr}
   .score-bar{grid-template-columns:repeat(3,1fr)}
   .sc-detail{display:none}
-  .h-card,.b-slot{width:115px;min-height:158px}
-  .trans-grid{grid-template-columns:1fr}
+  .h-card,.b-slot{width:116px;min-height:162px}
+  .h-trans-ref{grid-template-columns:1fr}
 }
 </style>
 </head>
-<body style="">
+<body>
 
-<!-- COLLAPSE OVERLAY -->
-<div class="collapse-overlay" id="collapse-overlay">
+<!-- COLLAPSE -->
+<div class="collapse-ov" id="col-ov">
   <div class="collapse-title">◆ Dream Collapsed ◆</div>
   <div class="collapse-sub">The Coherence Track reached zero. The dream unravelled into nightmare.</div>
   <button class="collapse-btn" onclick="resetGame()">Begin Again</button>
 </div>
 
-<!-- HELP LIGHTBOX -->
-<div class="help-overlay" id="help-overlay" onclick="closeHelp(event)">
-  <div class="help-box" onclick="event.stopPropagation()">
-    <div class="help-header">
-      <div class="help-title">◆ Oneirium — Game Rules ◆</div>
-      <button class="help-close" onclick="closeHelpBox()">Close</button>
+<!-- HELP -->
+<div class="help-ov" id="help-ov" onclick="helpOvClick(event)">
+  <div class="help-box">
+    <div class="help-hdr">
+      <div class="help-hdr-title">◆ Oneirium — How to Play ◆</div>
+      <button class="help-close" onclick="closeHelp()">Close</button>
     </div>
-    <div class="help-tabs" id="help-tabs"><button class="help-tab">Overview</button><button class="help-tab">Scoring</button><button class="help-tab">Transitions</button><button class="help-tab">Coherence Track</button><button class="help-tab">Card Types</button><button class="help-tab active">Sandbox Status</button><button class="help-tab">Deck Building</button></div>
-    <div class="help-body" id="help-body"><div class="help-panel" id="help-panel-0">
-      <h3>What is Oneirium?</h3>
-      <p>Oneirium is a 1v1 strategic card game of dream construction, emotional resonance, and narrative disruption. You are not fighting your opponent. You are building a dream while they try to unravel it.</p>
-      <p>You win by scoring more Coherence Points (CP) than your opponent by building a stable, emotionally resonant dream arc. Or by forcing your opponent's dream to collapse entirely.</p>
-      <h3>Core Concepts</h3>
-      <div class="help-rule">
-        <div class="help-rule-title">Dream Points (DP)</div>
-        <div class="help-rule-body">Your deck-building budget. Every card has a printed DP cost. Your deck total cannot exceed 100 DP. Disturbance cards have negative DP costs, refunding budget at the risk of instability.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Coherence Points (CP)</div>
-        <div class="help-rule-body">The scoring currency. Earned through base card values, tag synergies, emotional transitions, and endgame bonuses. Counted only at game end. Highest CP wins.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Coherence Track (CT)</div>
-        <div class="help-rule-body">A survival resource, not a scoring resource. Starts at 15. Tracks dream stability. Degrades when Disturbances land on your board. Collapse at zero means immediate loss.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Tags</div>
-        <div class="help-rule-body">Every card carries 1-2 tags: emotional, thematic, or symbolic descriptors. Tags are the engine of everything. Matching tags generate synergy. Evolving tags generate transitions.</div>
-      </div>
-    </div><div class="help-panel" id="help-panel-1">
-      <h3>Five Scoring Layers</h3>
-      <p>All scoring is calculated at game end. Layers apply in order.</p>
-      <div class="help-rule">
-        <div class="help-rule-title">Layer 1 — Base Card Values (1–3 CP each)</div>
-        <div class="help-rule-body">Every card scores its printed CP value regardless of any other conditions. A 10-year-old can understand this immediately.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Layer 2 — Tag Synergy (+1 CP per matching tag pair)</div>
-        <div class="help-rule-body">Any two cards on your board sharing a tag score +1 CP per pair. Stackable across the full board. Three cards all carrying Stillness = three pairs = +3 CP.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Layer 3 — Emotional Transitions (+3 CP each)</div>
-        <div class="help-rule-body">When a card with a From tag and a card with a To tag (from the Transition Pair List) are both on your board with at least one card between them, the transition completes for +3 CP.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Layer 4 — Full Arc Bonus (+5 CP, once)</div>
-        <div class="help-rule-body">Three or more completed transitions on your board at game end. The masterwork dream bonus. Rare and deeply satisfying.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Layer 5 — Discipline Endgame Bonus</div>
-        <div class="help-rule-body">Each discipline has one specific endgame condition scoring additional CP.</div>
-      </div>
-      <h3>Penalties &amp; Bonuses</h3>
-      <ul>
-        <li>Each unresolved Disturbance at game end: −2 CP</li>
-        <li>Resilience Bonus: CT fell to Critical (1–4) then recovered to Stable (9+): +3 CP</li>
-        <li>Clean Track Bonus: CT at 15 when game ends: +2 CP</li>
-      </ul>
-    </div><div class="help-panel" id="help-panel-2">
-      <h3>How Transitions Work</h3>
-      <p>A transition completes when a card with the <strong style="color:var(--c-tension)">From</strong> tag and a card with the <strong style="color:var(--c-resolve)">To</strong> tag are both on your arc with <strong style="color:var(--teal-pale)">at least one card between them</strong>.</p>
-      <p>The bridging card can be anything. It represents the narrative journey between emotional states. Its own tags still contribute to synergy independently.</p>
-      <p>Each tag can only serve one transition at a time. A card with two tags can enable two different transitions using its two tags separately, but one tag cannot anchor two transitions simultaneously.</p>
-      <p>When a transition completes during play, its Echo effect triggers immediately.</p>
-      <h3>All 12 Transition Pairs</h3>
-      <div class="trans-ref" id="help-trans-ref"><div class="trans-ref-row"><span class="tr-from">Fear</span><span class="tr-arr">→</span><span class="tr-to">Courage</span><span class="tr-echo">Draw 1 card</span></div><div class="trans-ref-row"><span class="tr-from">Grief</span><span class="tr-arr">→</span><span class="tr-to">Release</span><span class="tr-echo">Remove a Disturbance</span></div><div class="trans-ref-row"><span class="tr-from">Anxiety</span><span class="tr-arr">→</span><span class="tr-to">Stillness</span><span class="tr-echo">+2 CT</span></div><div class="trans-ref-row"><span class="tr-from">Loneliness</span><span class="tr-arr">→</span><span class="tr-to">Connection</span><span class="tr-echo">+2 CT</span></div><div class="trans-ref-row"><span class="tr-from">Confusion</span><span class="tr-arr">→</span><span class="tr-to">Clarity</span><span class="tr-echo">Look at top 2 cards</span></div><div class="trans-ref-row"><span class="tr-from">Despair</span><span class="tr-arr">→</span><span class="tr-to">Hope</span><span class="tr-echo">+1 CP per chain</span></div><div class="trans-ref-row"><span class="tr-from">Anger</span><span class="tr-arr">→</span><span class="tr-to">Understanding</span><span class="tr-echo">Reposition a card</span></div><div class="trans-ref-row"><span class="tr-from">Shame</span><span class="tr-arr">→</span><span class="tr-to">Acceptance</span><span class="tr-echo">Negate next Disturbance</span></div><div class="trans-ref-row"><span class="tr-from">Loss</span><span class="tr-arr">→</span><span class="tr-to">Gratitude</span><span class="tr-echo">+2 CP</span></div><div class="trans-ref-row"><span class="tr-from">Dread</span><span class="tr-arr">→</span><span class="tr-to">Wonder</span><span class="tr-echo">+1 CP per Wonder</span></div><div class="trans-ref-row"><span class="tr-from">Isolation</span><span class="tr-arr">→</span><span class="tr-to">Belonging</span><span class="tr-echo">+3 CP</span></div><div class="trans-ref-row"><span class="tr-from">Doubt</span><span class="tr-arr">→</span><span class="tr-to">Trust</span><span class="tr-echo">Double adjacent synergy</span></div></div>
-    </div><div class="help-panel" id="help-panel-3">
-      <h3>The Coherence Track</h3>
-      <p>The CT is a public survival resource. Both players' tracks are visible at all times. It is entirely separate from CP scoring.</p>
-      <p>Each Disturbance card has a printed CT drain value, applied immediately on placement. Removing a Disturbance restores the CT by that amount.</p>
-      <h3>CT Zones</h3>
-      <div class="help-rule">
-        <div class="help-rule-title" style="color:var(--ct-stable)">Stable — 9 to 15</div>
-        <div class="help-rule-body">Normal play. No modifiers.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title" style="color:var(--ct-unstable)">Unstable — 5 to 8</div>
-        <div class="help-rule-body">Maximum 1 card played per turn. Opponent gains +1 CP when placing Disturbances against you.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title" style="color:var(--ct-critical)">Critical — 1 to 4</div>
-        <div class="help-rule-body">Unstable rules apply. If you recover back to Stable before game end, gain the Resilience Bonus (+3 CP).</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title" style="color:#ff4444">Collapse — 0</div>
-        <div class="help-rule-body">Immediate loss. The dream unravels into nightmare.</div>
-      </div>
-      <h3>Disturbance Drain Reference</h3>
-      <ul>
-        <li>Weak Disturbance (−1 DP): −1 CT on placement</li>
-        <li>Standard Disturbance (−2 DP): −2 CT on placement</li>
-        <li>Strong Disturbance (−3 DP): −3 to −4 CT on placement</li>
-      </ul>
-    </div><div class="help-panel" id="help-panel-4">
-      <h3>Card Types</h3>
-      <div class="help-rule">
-        <div class="help-rule-title">Emotion (1–3 DP)</div>
-        <div class="help-rule-body">Emotional tone. Can be played standalone in the arc row, or tucked under a card with an Emotion Slot. When tucked, it belongs entirely to the host card's position and does not take up its own row position. The choice is permanent.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Character (3–5 DP)</div>
-        <div class="help-rule-body">Dream figures with traits and synergy potential. Many carry an Emotion Slot (marked with a pink circle pip).</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Setting (3–5 DP)</div>
-        <div class="help-rule-body">Environments and locations. Provide strong tag anchors and often carry Emotion Slots.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Situation (2–4 DP)</div>
-        <div class="help-rule-body">Narrative events and turning points. Often have immediate card actions on play.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Object (2–4 DP)</div>
-        <div class="help-rule-body">Symbolic or functional dream items. Flexible synergy connectors.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Resolution (3–6 DP)</div>
-        <div class="help-rule-body">Clears Disturbances and can restore CT. Essential for managing your track.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Disturbance (−1 to −3 DP)</div>
-        <div class="help-rule-body">Played into the opponent's arc. Drains their CT immediately on placement. Suppresses synergy or breaks transition chains. Max 2 on any board simultaneously (3 for the Dissonants discipline).</div>
-      </div>
-      <h3>Tag Families &amp; Colors</h3>
-      <div class="help-tag-row"><div class="help-tag-fam" style="color:var(--c-tension)">Tension</div><div class="help-tag-list">Fear, Anxiety, Dread, Grief, Shame, Loneliness, Anger, Despair, Tension, Dissonance, Disruption</div></div>
-      <div class="help-tag-row"><div class="help-tag-fam" style="color:var(--c-resolve)">Resolve</div><div class="help-tag-list">Courage, Hope, Clarity, Acceptance, Trust, Gratitude, Understanding</div></div>
-      <div class="help-tag-row"><div class="help-tag-fam" style="color:var(--c-warmth)">Warmth</div><div class="help-tag-list">Comfort, Joy, Nostalgia, Belonging, Warmth, Safety</div></div>
-      <div class="help-tag-row"><div class="help-tag-fam" style="color:var(--c-motion)">Motion</div><div class="help-tag-list">Curiosity, Wonder, Awe, Excitement, Exploration, Lightness</div></div>
-      <div class="help-tag-row"><div class="help-tag-fam" style="color:var(--c-still)">Stillness</div><div class="help-tag-list">Stillness, Silence, Peace, Release, Patience</div></div>
-      <div class="help-tag-row"><div class="help-tag-fam" style="color:var(--c-struct)">Structure</div><div class="help-tag-list">Logic, Process, Order, Control, Precision, Analysis</div></div>
-    </div><div class="help-panel active" id="help-panel-5">
-      <h3>What this sandbox is</h3>
-      <p>This is a single-player design and scoring sandbox for Oneirium. Its purpose is to let you explore the card set, test dream arc combinations, and feel how the scoring and CT mechanics work in practice. It is not yet a full game.</p>
-      <h3>What works right now</h3>
-      <div class="help-rule">
-        <div class="help-rule-title">Full 60-card base set</div>
-        <div class="help-rule-body">All 60 base set cards are browsable and playable. Category filters let you navigate by type. Card actions are displayed on each card for reference, though they do not trigger automatically yet.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Deck building</div>
-        <div class="help-rule-body">Build Deck randomly assembles a legal deck within 100 DP with a minimum of 4 Disturbances. You can also manually add any card from the base set by tapping it. The DP bar tracks your budget in real time.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Dream Arc placement</div>
-        <div class="help-rule-body">Tap any deck card once to place it in the arc. Tap an arc card to remove it. Desktop: drag cards directly. Up to 12 cards per arc.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Live scoring</div>
-        <div class="help-rule-body">All five scoring layers calculate in real time as you build: base CP, tag synergy pairs, emotional transitions (+3 CP each), the Full Arc Bonus (+5 CP for three or more transitions), and Disturbance CP penalties. Completed transitions and active synergies are shown as hint badges below the arc.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Coherence Track</div>
-        <div class="help-rule-body">The CT starts at 15 and drains immediately when a Disturbance lands in the arc. Zone indicators (Stable, Unstable, Critical, Collapse) update in real time. Removing a Disturbance restores CT. The Resolve button simulates a Resolution card restoring +2 CT. Collapse at zero triggers the dream collapse screen.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Transition detection</div>
-        <div class="help-rule-body">All 12 transition pairs are detected automatically. Each tag can only serve one transition at a time. A card with two tags can enable two different transitions through its two tags independently.</div>
-      </div>
-      <h3>What is not yet built</h3>
-      <ul>
-        <li>Opponent board and two-player mode</li>
-        <li>Turn structure and turn limits</li>
-        <li>Card actions triggering automatically (Emotion Slot attachment, draw effects, CT restoration on play, etc.)</li>
-        <li>Disturbance placement on an opponent's board</li>
-        <li>Resolution card mechanics (removing Disturbances)</li>
-        <li>Discipline passives and endgame bonuses</li>
-        <li>Hand management and draw mechanics</li>
-        <li>Resilience Bonus and Clean Track Bonus tracking</li>
-      </ul>
-      <h3>What comes next</h3>
-      <p>The next planned step is opponent board and basic two-player turn structure. Once that is in place, Disturbance placement, Resolution mechanics, and card actions will follow. The full digital MVP will be built in Claude Code as a proper multi-file project.</p>
-    </div><div class="help-panel" id="help-panel-6">
-      <h3>Building Your Deck</h3>
-      <ul>
-        <li>Exactly 30 cards per deck</li>
-        <li>Maximum 100 DP total budget</li>
-        <li>At least 4 Disturbance cards required (maximum 10)</li>
-        <li>Disturbances refund DP, letting you afford stronger cards elsewhere</li>
-      </ul>
-      <h3>Recommended Composition</h3>
-      <div class="help-rule">
-        <div class="help-rule-body">Emotions: 8–10 &nbsp;·&nbsp; Characters: 4–6 &nbsp;·&nbsp; Situations: 4–5 &nbsp;·&nbsp; Settings: 3–4 &nbsp;·&nbsp; Objects: 2–3 &nbsp;·&nbsp; Resolutions: 3–4 &nbsp;·&nbsp; Disturbances: 4–10</div>
-      </div>
-      <h3>What Happens Without Balance</h3>
-      <ul>
-        <li>Too few Emotions: low CP ceiling, transitions hard to build</li>
-        <li>Too many Disturbances: slow board development, hand full of attack cards early</li>
-        <li>Too few Resolutions: fragile CT, vulnerable to Disturbance pressure</li>
-      </ul>
-      <h3>Budget Math</h3>
-      <p>6 Disturbances at −2 DP average = 12 DP refunded. Effective purchasing power for remaining 24 cards: 112 DP. This is the Disturbance economy: invite chaos, afford power.</p>
-    </div></div>
+    <div class="help-tabs" id="help-tabs"><button class="help-tab active">Overview</button><button class="help-tab">Scoring</button><button class="help-tab">Transitions</button><button class="help-tab">Coherence Track</button><button class="help-tab">Card Types</button><button class="help-tab">Deck Building</button><button class="help-tab">Sandbox Status</button></div>
+    <div class="help-body" id="help-body"><div class="help-panel active">
+    <h3>What is Oneirium?</h3>
+    <p>A 1v1 strategic card game of dream construction, emotional resonance, and narrative disruption. You are not fighting your opponent. You are building a dream while they try to unravel it.</p>
+    <p>You win by scoring more Coherence Points (CP) than your opponent, or by forcing their dream to collapse entirely.</p>
+    <h3>Core Concepts</h3>
+    <div class="h-rule"><div class="h-rule-t">Dream Points (DP)</div><div class="h-rule-b">Deck-building budget. Every card has a DP cost. Deck total cannot exceed 100 DP. Disturbances have negative DP costs.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Coherence Points (CP)</div><div class="h-rule-b">The scoring currency. Counted only at game end. Highest CP wins.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Coherence Track (CT)</div><div class="h-rule-b">Survival resource, not scoring. Starts at 15. Drains when Disturbances land. Collapse at zero = immediate loss.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Tags</div><div class="h-rule-b">Every card carries 1–2 tags. Matching tags generate synergy. Evolving tags generate transitions. Tags are the engine of everything.</div></div>
+  </div><div class="help-panel">
+    <h3>Five Scoring Layers</h3>
+    <div class="h-rule"><div class="h-rule-t">Layer 1 — Base Card Values (1–3 CP each)</div><div class="h-rule-b">Every card scores its printed CP regardless of other conditions.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Layer 2 — Tag Synergy (+1 CP per matching tag pair)</div><div class="h-rule-b">Two cards sharing a tag = +1 CP per pair. Stackable across the board.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Layer 3 — Emotional Transitions (+3 CP each)</div><div class="h-rule-b">From tag card + To tag card on arc, with at least one card between them.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Layer 4 — Full Arc Bonus (+5 CP, once)</div><div class="h-rule-b">Three or more completed transitions at game end.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Layer 5 — Discipline Endgame Bonus</div><div class="h-rule-b">Each discipline has one specific endgame condition.</div></div>
+    <h3>Penalties &amp; Bonuses</h3>
+    <ul>
+      <li>Each unresolved Disturbance at game end: −2 CP</li>
+      <li>Resilience Bonus (CT fell to Critical then recovered to Stable): +3 CP</li>
+      <li>Clean Track Bonus (CT at 15 at game end): +2 CP</li>
+    </ul>
+  </div><div class="help-panel">
+    <h3>How Transitions Work</h3>
+    <p>A transition completes when a card with the <strong style="color:var(--c-tension)">From</strong> tag and a card with the <strong style="color:var(--c-resolve)">To</strong> tag are both on your arc with <strong style="color:var(--teal-pale)">at least one card between them</strong>. That middle card can be anything.</p>
+    <p>Each tag can only serve one transition at a time. A card with two tags can enable two different transitions through its two different tags, but one tag cannot anchor two transitions simultaneously.</p>
+    <h3>All 12 Transition Pairs</h3>
+    <div class="h-trans-ref" id="h-trans-ref"><div class="h-tr-row"><span class="h-tr-f">Fear</span><span class="h-tr-a">→</span><span class="h-tr-t">Courage</span><span class="h-tr-e">Draw 1 card</span></div><div class="h-tr-row"><span class="h-tr-f">Grief</span><span class="h-tr-a">→</span><span class="h-tr-t">Release</span><span class="h-tr-e">Remove a Disturbance</span></div><div class="h-tr-row"><span class="h-tr-f">Anxiety</span><span class="h-tr-a">→</span><span class="h-tr-t">Stillness</span><span class="h-tr-e">+2 CT</span></div><div class="h-tr-row"><span class="h-tr-f">Loneliness</span><span class="h-tr-a">→</span><span class="h-tr-t">Connection</span><span class="h-tr-e">+2 CT</span></div><div class="h-tr-row"><span class="h-tr-f">Confusion</span><span class="h-tr-a">→</span><span class="h-tr-t">Clarity</span><span class="h-tr-e">Look at top 2 cards</span></div><div class="h-tr-row"><span class="h-tr-f">Despair</span><span class="h-tr-a">→</span><span class="h-tr-t">Hope</span><span class="h-tr-e">+1 CP per chain</span></div><div class="h-tr-row"><span class="h-tr-f">Anger</span><span class="h-tr-a">→</span><span class="h-tr-t">Understanding</span><span class="h-tr-e">Reposition a card</span></div><div class="h-tr-row"><span class="h-tr-f">Shame</span><span class="h-tr-a">→</span><span class="h-tr-t">Acceptance</span><span class="h-tr-e">Negate next Disturbance</span></div><div class="h-tr-row"><span class="h-tr-f">Loss</span><span class="h-tr-a">→</span><span class="h-tr-t">Gratitude</span><span class="h-tr-e">+2 CP</span></div><div class="h-tr-row"><span class="h-tr-f">Dread</span><span class="h-tr-a">→</span><span class="h-tr-t">Wonder</span><span class="h-tr-e">+1 CP per Wonder</span></div><div class="h-tr-row"><span class="h-tr-f">Isolation</span><span class="h-tr-a">→</span><span class="h-tr-t">Belonging</span><span class="h-tr-e">+3 CP</span></div><div class="h-tr-row"><span class="h-tr-f">Doubt</span><span class="h-tr-a">→</span><span class="h-tr-t">Trust</span><span class="h-tr-e">Double adjacent synergy</span></div></div>
+  </div><div class="help-panel">
+    <h3>The Coherence Track</h3>
+    <p>Starts at 15. Drains immediately when a Disturbance is placed. Removing a Disturbance restores the CT by its drain value.</p>
+    <div class="h-rule"><div class="h-rule-t" style="color:var(--ct-stable)">Stable — 9 to 15</div><div class="h-rule-b">Normal play. No modifiers.</div></div>
+    <div class="h-rule"><div class="h-rule-t" style="color:var(--ct-unstable)">Unstable — 5 to 8</div><div class="h-rule-b">Max 1 card per turn. Opponent gains +1 CP when placing Disturbances against you.</div></div>
+    <div class="h-rule"><div class="h-rule-t" style="color:var(--ct-critical)">Critical — 1 to 4</div><div class="h-rule-b">Unstable rules apply. Recover to Stable before game end for +3 CP Resilience Bonus.</div></div>
+    <div class="h-rule"><div class="h-rule-t" style="color:#ff4444">Collapse — 0</div><div class="h-rule-b">Immediate loss. The dream unravels.</div></div>
+  </div><div class="help-panel">
+    <h3>Types &amp; Category Colors</h3>
+    <div class="h-rule"><div class="h-rule-t"><span class="cat-swatch" style="background:var(--card-emotion)"></span>Emotion (1–3 DP)</div><div class="h-rule-b">Emotional tone. Played standalone in the arc row, or tucked under an Emotion Slot card. Choice is permanent. Does not occupy a row position when tucked.</div></div>
+    <div class="h-rule"><div class="h-rule-t"><span class="cat-swatch" style="background:var(--card-character)"></span>Character (3–5 DP)</div><div class="h-rule-b">Dream figures. Many carry an Emotion Slot (pink circle pip on the card).</div></div>
+    <div class="h-rule"><div class="h-rule-t"><span class="cat-swatch" style="background:var(--card-setting)"></span>Setting (3–5 DP)</div><div class="h-rule-b">Environments and locations. Strong tag anchors.</div></div>
+    <div class="h-rule"><div class="h-rule-t"><span class="cat-swatch" style="background:var(--card-situation)"></span>Situation (2–4 DP)</div><div class="h-rule-b">Narrative events. Often have immediate actions on play.</div></div>
+    <div class="h-rule"><div class="h-rule-t"><span class="cat-swatch" style="background:var(--card-object)"></span>Object (2–4 DP)</div><div class="h-rule-b">Symbolic or functional items. Flexible synergy connectors.</div></div>
+    <div class="h-rule"><div class="h-rule-t"><span class="cat-swatch" style="background:var(--card-resolution)"></span>Resolution (3–6 DP)</div><div class="h-rule-b">Clears Disturbances and can restore CT.</div></div>
+    <div class="h-rule"><div class="h-rule-t"><span class="cat-swatch" style="background:var(--card-disturbance)"></span>Disturbance (−1 to −3 DP)</div><div class="h-rule-b">Played into the opponent's arc. Drains CT immediately on placement. Max 2 on any board simultaneously.</div></div>
+    <h3>Tag Family Colors</h3>
+    <div class="h-tag-row"><div class="h-tag-fam" style="color:var(--c-tension)">Tension</div><div class="h-tag-list">Fear, Anxiety, Dread, Grief, Shame, Loneliness, Anger, Despair, Tension, Dissonance, Disruption</div></div>
+    <div class="h-tag-row"><div class="h-tag-fam" style="color:var(--c-resolve)">Resolve</div><div class="h-tag-list">Courage, Hope, Clarity, Acceptance, Trust, Gratitude, Understanding</div></div>
+    <div class="h-tag-row"><div class="h-tag-fam" style="color:var(--c-warmth)">Warmth</div><div class="h-tag-list">Comfort, Joy, Nostalgia, Belonging, Warmth, Safety</div></div>
+    <div class="h-tag-row"><div class="h-tag-fam" style="color:var(--c-motion)">Motion</div><div class="h-tag-list">Curiosity, Wonder, Awe, Excitement, Exploration, Lightness</div></div>
+    <div class="h-tag-row"><div class="h-tag-fam" style="color:var(--c-still)">Stillness</div><div class="h-tag-list">Stillness, Silence, Peace, Release, Patience</div></div>
+    <div class="h-tag-row"><div class="h-tag-fam" style="color:var(--c-struct)">Structure</div><div class="h-tag-list">Logic, Process, Order, Control, Precision, Analysis</div></div>
+  </div><div class="help-panel">
+    <h3>Building Your Deck</h3>
+    <ul>
+      <li>Exactly 30 cards, maximum 100 DP total</li>
+      <li>At least 4 Disturbance cards required (maximum 10)</li>
+      <li>Disturbances refund DP budget, letting you afford stronger cards</li>
+    </ul>
+    <h3>Recommended Composition</h3>
+    <div class="h-rule"><div class="h-rule-b">Emotions: 8–10 · Characters: 4–6 · Situations: 4–5 · Settings: 3–4 · Objects: 2–3 · Resolutions: 3–4 · Disturbances: 4–10</div></div>
+    <ul>
+      <li>Too few Emotions: low CP ceiling</li>
+      <li>Too many Disturbances: slow board development</li>
+      <li>Too few Resolutions: fragile CT</li>
+    </ul>
+  </div><div class="help-panel">
+    <h3>What works right now</h3>
+    <div class="h-rule"><div class="h-rule-t">Full 60-card base set</div><div class="h-rule-b">All 60 cards browsable and playable. Category filters and colour-coded backgrounds by card type.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Deck building</div><div class="h-rule-b">Build Deck randomly assembles a legal deck within 100 DP. Manual card addition also supported.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Live scoring</div><div class="h-rule-b">All five scoring layers calculate in real time: base CP, tag synergy, transitions (+3 CP each), Full Arc Bonus (+5), Disturbance penalties. Each tag can only serve one transition at a time.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Coherence Track</div><div class="h-rule-b">Starts at 15. Drains on Disturbance placement. Zone indicators update in real time. Collapse at zero. Disturbance tags contribute to transitions when on your arc.</div></div>
+    <h3>Not yet built</h3>
+    <ul>
+      <li>Opponent board and two-player turn structure</li>
+      <li>Card actions triggering automatically</li>
+      <li>Resolution card mechanics (removing Disturbances from arc)</li>
+      <li>Discipline passives and endgame bonuses</li>
+      <li>Hand management and draw mechanics</li>
+    </ul>
+    <h3>What comes next</h3>
+    <p>Opponent board and basic two-player turn structure. Then Disturbance placement on the opponent's arc. Then the full MVP in Claude Code as a proper multi-file project.</p>
+  </div></div>
   </div>
 </div>
 
 <div class="header">
   <div class="header-orn">◆ &nbsp; ◆ &nbsp; ◆</div>
   <h1>Oneirium</h1>
-  <p>Dream Sandbox — Base Set, 60 Cards &nbsp;&nbsp;<button class="help-btn" onclick="openHelp()">◆ How to Play</button></p>
+  <div class="header-sub">
+    <span>Dream Sandbox — Base Set, 60 Cards</span>
+    <button class="help-btn" onclick="openHelp(0)">◆ How to Play</button>
+  </div>
 </div>
 
 <div class="main">
 
-<!-- TOP ROW: score + CT -->
+<!-- SCORE + CT -->
 <div class="top-row">
   <div>
     <div class="score-bar">
@@ -417,19 +375,18 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="sc-detail" id="bdet"><em>Place cards from your deck onto the dream arc to score.</em></div>
     </div>
   </div>
-  <!-- CT PANEL -->
   <div class="ct-panel">
     <div>
       <div class="ct-label">Coherence Track</div>
-      <div class="ct-value-row">
-        <div class="ct-number" id="ct-number" style="color: var(--ct-stable);">15</div>
-        <div class="ct-max">/ 15</div>
+      <div class="ct-val-row">
+        <div class="ct-num" id="ct-num" style="color: var(--ct-stable);">15</div>
+        <div class="ct-max-lbl">/ 15</div>
       </div>
     </div>
     <div class="ct-track" id="ct-track"><div class="ct-pip" style="background: var(--ct-stable);"></div><div class="ct-pip" style="background: var(--ct-stable);"></div><div class="ct-pip" style="background: var(--ct-stable);"></div><div class="ct-pip" style="background: var(--ct-stable);"></div><div class="ct-pip" style="background: var(--ct-stable);"></div><div class="ct-pip" style="background: var(--ct-stable);"></div><div class="ct-pip" style="background: var(--ct-stable);"></div><div class="ct-pip" style="background: var(--ct-stable);"></div><div class="ct-pip" style="background: var(--ct-stable);"></div><div class="ct-pip" style="background: var(--ct-stable);"></div><div class="ct-pip" style="background: var(--ct-stable);"></div><div class="ct-pip" style="background: var(--ct-stable);"></div><div class="ct-pip" style="background: var(--ct-stable);"></div><div class="ct-pip" style="background: var(--ct-stable);"></div><div class="ct-pip" style="background: var(--ct-stable);"></div></div>
-    <div class="ct-zone-badge ct-zone-stable" id="ct-zone">Stable</div>
-    <div class="ct-effects" id="ct-effects">Normal play. No modifiers.</div>
-    <button class="ct-restore-btn" onclick="restoreCT(2)" title="Simulate Resolution card (+2 CT)">+ Resolve (+2 CT)</button>
+    <div class="ct-badge ct-stable" id="ct-badge">Stable</div>
+    <div class="ct-effects" id="ct-fx">Normal play. No modifiers.</div>
+    <button class="ct-restore" onclick="restoreCT(2)">+ Resolve (+2 CT)</button>
   </div>
 </div>
 
@@ -438,53 +395,47 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
   <div class="ctrl-row">
     <div class="stitle" style="margin:0">◆ Dream Arc ◆</div>
     <button class="btn" onclick="clearArc()">Clear Arc</button>
-    <span class="ctrl-info" id="arc-count">0 / 12</span>
+    <span class="ctrl-info" id="arc-cnt">0 / 12</span>
   </div>
-  <div class="instr">
-    <strong>Tap any deck card once</strong> to place it in the arc. Disturbance cards drain the CT immediately on placement. Tap an arc card to remove it (CT is restored if it was a Disturbance).
-  </div>
-  <div class="board-row" id="board-row"><div class="add-slot"><span style="opacity:.3;font-size:.65rem;font-family:&#39;Cinzel&#39;,serif;letter-spacing:.05em">drop</span></div></div>
+  <div class="instr"><strong>Tap any deck card once</strong> to place it in the arc. Disturbance cards drain the CT immediately. Tap an arc card to remove it (CT restores if it was a Disturbance).</div>
+  <div class="board-row" id="board-row"><div class="add-slot"><span style="opacity:.28;font-size:.6rem;font-family:&#39;Cinzel&#39;,serif">drop</span></div></div>
   <div class="hints-row" id="hints-row"></div>
 </div>
 
-<!-- YOUR DECK -->
+<!-- DECK -->
 <div class="section deck-sec">
   <div class="ctrl-row">
     <div class="stitle" style="margin:0">◆ Your Deck ◆</div>
     <button class="btn primary" onclick="buildDeck()">Build Deck ◆</button>
     <button class="btn" onclick="clearDeck()">Clear Deck</button>
-    <span class="ctrl-info">Cards: <span id="deck-count" style="color:var(--teal-pale);font-weight:600">0</span></span>
+    <span class="ctrl-info">Cards: <span id="deck-cnt" style="color:var(--teal-pale);font-weight:600">0</span></span>
     <div class="dp-wrap">
       <div class="dp-bg"><div class="dp-fill" id="dp-fill" style="width:0%"></div></div>
       <span class="dp-lbl" id="dp-lbl">0 / 100 DP</span>
     </div>
   </div>
-  <div class="filter-row" id="deck-filter-row"><button class="filter-btn active">All</button><button class="filter-btn">Emotion</button><button class="filter-btn">Character</button><button class="filter-btn">Setting</button><button class="filter-btn">Situation</button><button class="filter-btn">Object</button><button class="filter-btn">Resolution</button><button class="filter-btn">Disturbance</button></div>
-  <div class="instr">
-    <strong>Tap a card once</strong> to place it in the arc. Disturbances drain the CT on landing. Cards already in the arc are dimmed.
-  </div>
-  <div class="card-grid" id="deck-grid"><div style="font-size:.8rem;color:var(--smoke);font-style:italic;padding:.5rem 0">Your deck is empty. Use Build Deck or add cards from the base set below.</div></div>
+  <div class="filter-row" id="deck-fr"><button class="fbtn active">All</button><button class="fbtn">Emotion</button><button class="fbtn">Character</button><button class="fbtn">Setting</button><button class="fbtn">Situation</button><button class="fbtn">Object</button><button class="fbtn">Resolution</button><button class="fbtn">Disturbance</button></div>
+  <div class="instr"><strong>Tap once</strong> to place in the arc. Cards in the arc are dimmed.</div>
+  <div class="card-grid" id="deck-grid"><div style="font-size:.8rem;color:var(--smoke);font-style:italic;padding:.4rem 0">Deck empty. Use Build Deck or add cards below.</div></div>
 </div>
 
 <!-- TRANSITION REFERENCE -->
 <div class="section trans-sec">
-  <div class="stitle purple">◆ Transition Pair Reference ◆</div>
-  <p style="font-size:.8rem;color:var(--smoke);font-style:italic;margin-bottom:.75rem;line-height:1.6">
-    A transition completes when a card with the <strong style="color:var(--c-tension);font-style:normal">From</strong> tag and a card with the <strong style="color:var(--c-resolve);font-style:normal">To</strong> tag are both on your arc with at least one card between them. Each completed transition scores <strong style="color:var(--teal-pale);font-style:normal">+3 CP</strong> and triggers its Echo effect immediately. Each tag can only enable one transition at a time.
+  <div class="stitle pur">◆ Transition Pair Reference ◆</div>
+  <p style="font-size:.78rem;color:var(--smoke);font-style:italic;margin-bottom:.7rem;line-height:1.58">
+    A transition completes when a card with the <strong style="color:var(--c-tension);font-style:normal">From</strong> tag and a card with the <strong style="color:var(--c-resolve);font-style:normal">To</strong> tag are both on your arc with <strong style="color:var(--teal-pale);font-style:normal">at least one card between them</strong>. Each completed transition scores <strong style="color:var(--teal-pale);font-style:normal">+3 CP</strong> and triggers its Echo effect. Each tag enables only one transition at a time.
   </p>
-  <div class="trans-grid" id="trans-grid"><div class="trans-row"><span class="trans-from">Fear</span><span class="trans-arrow">→</span><span class="trans-to">Courage</span><span class="trans-echo">Draw 1 card</span></div><div class="trans-row"><span class="trans-from">Grief</span><span class="trans-arrow">→</span><span class="trans-to">Release</span><span class="trans-echo">Remove a Disturbance</span></div><div class="trans-row"><span class="trans-from">Anxiety</span><span class="trans-arrow">→</span><span class="trans-to">Stillness</span><span class="trans-echo">+2 CT</span></div><div class="trans-row"><span class="trans-from">Loneliness</span><span class="trans-arrow">→</span><span class="trans-to">Connection</span><span class="trans-echo">+2 CT</span></div><div class="trans-row"><span class="trans-from">Confusion</span><span class="trans-arrow">→</span><span class="trans-to">Clarity</span><span class="trans-echo">Look at top 2 cards</span></div><div class="trans-row"><span class="trans-from">Despair</span><span class="trans-arrow">→</span><span class="trans-to">Hope</span><span class="trans-echo">+1 CP per chain</span></div><div class="trans-row"><span class="trans-from">Anger</span><span class="trans-arrow">→</span><span class="trans-to">Understanding</span><span class="trans-echo">Reposition a card</span></div><div class="trans-row"><span class="trans-from">Shame</span><span class="trans-arrow">→</span><span class="trans-to">Acceptance</span><span class="trans-echo">Negate next Disturbance</span></div><div class="trans-row"><span class="trans-from">Loss</span><span class="trans-arrow">→</span><span class="trans-to">Gratitude</span><span class="trans-echo">+2 CP</span></div><div class="trans-row"><span class="trans-from">Dread</span><span class="trans-arrow">→</span><span class="trans-to">Wonder</span><span class="trans-echo">+1 CP per Wonder</span></div><div class="trans-row"><span class="trans-from">Isolation</span><span class="trans-arrow">→</span><span class="trans-to">Belonging</span><span class="trans-echo">+3 CP</span></div><div class="trans-row"><span class="trans-from">Doubt</span><span class="trans-arrow">→</span><span class="trans-to">Trust</span><span class="trans-echo">Double adjacent synergy</span></div></div>
+  <div class="trans-grid" id="trans-grid"><div class="tr-row"><span class="tr-from">Fear</span><span class="tr-arr">→</span><span class="tr-to">Courage</span><span class="tr-echo">Draw 1 card</span></div><div class="tr-row"><span class="tr-from">Grief</span><span class="tr-arr">→</span><span class="tr-to">Release</span><span class="tr-echo">Remove a Disturbance</span></div><div class="tr-row"><span class="tr-from">Anxiety</span><span class="tr-arr">→</span><span class="tr-to">Stillness</span><span class="tr-echo">+2 CT</span></div><div class="tr-row"><span class="tr-from">Loneliness</span><span class="tr-arr">→</span><span class="tr-to">Connection</span><span class="tr-echo">+2 CT</span></div><div class="tr-row"><span class="tr-from">Confusion</span><span class="tr-arr">→</span><span class="tr-to">Clarity</span><span class="tr-echo">Look at top 2 cards</span></div><div class="tr-row"><span class="tr-from">Despair</span><span class="tr-arr">→</span><span class="tr-to">Hope</span><span class="tr-echo">+1 CP per chain</span></div><div class="tr-row"><span class="tr-from">Anger</span><span class="tr-arr">→</span><span class="tr-to">Understanding</span><span class="tr-echo">Reposition a card</span></div><div class="tr-row"><span class="tr-from">Shame</span><span class="tr-arr">→</span><span class="tr-to">Acceptance</span><span class="tr-echo">Negate next Disturbance</span></div><div class="tr-row"><span class="tr-from">Loss</span><span class="tr-arr">→</span><span class="tr-to">Gratitude</span><span class="tr-echo">+2 CP</span></div><div class="tr-row"><span class="tr-from">Dread</span><span class="tr-arr">→</span><span class="tr-to">Wonder</span><span class="tr-echo">+1 CP per Wonder</span></div><div class="tr-row"><span class="tr-from">Isolation</span><span class="tr-arr">→</span><span class="tr-to">Belonging</span><span class="tr-echo">+3 CP</span></div><div class="tr-row"><span class="tr-from">Doubt</span><span class="tr-arr">→</span><span class="tr-to">Trust</span><span class="tr-echo">Double adjacent synergy</span></div></div>
 </div>
 
-<!-- BASE SET BROWSER -->
+<!-- BASE SET -->
 <div class="section base-sec">
-  <div class="ctrl-row" style="margin-bottom:.6rem">
+  <div class="ctrl-row" style="margin-bottom:.55rem">
     <div class="stitle" style="margin:0">◆ Base Set — 60 Cards ◆</div>
   </div>
-  <div class="filter-row" id="base-filter-row"><button class="filter-btn active">All</button><button class="filter-btn">Emotion</button><button class="filter-btn">Character</button><button class="filter-btn">Setting</button><button class="filter-btn">Situation</button><button class="filter-btn">Object</button><button class="filter-btn">Resolution</button><button class="filter-btn">Disturbance</button></div>
-  <div class="instr">
-    <strong>Browse all 60 cards.</strong> Tap any card to add it to your deck. Cards already in your deck are dimmed.
-  </div>
-  <div class="card-grid" id="base-grid"><div class="h-card"><div class="ci">
+  <div class="filter-row" id="base-fr"><button class="fbtn active">All</button><button class="fbtn">Emotion</button><button class="fbtn">Character</button><button class="fbtn">Setting</button><button class="fbtn">Situation</button><button class="fbtn">Object</button><button class="fbtn">Resolution</button><button class="fbtn">Disturbance</button></div>
+  <div class="instr"><strong>Browse all 60 cards.</strong> Tap any card to add it to your deck. Cards already in your deck are dimmed.</div>
+  <div class="card-grid" id="base-grid"><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">The Weight of Unspoken Fear</div>
@@ -495,7 +446,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Fear</span><span class="tag tf-tension">Anxiety</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">The Weight of Unspoken Fear</div>
@@ -506,7 +457,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Fear</span><span class="tag tf-tension">Anxiety</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">Flicker of First Courage</div>
@@ -517,7 +468,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-resolve">Hope</span><span class="tag tf-resolve">Courage</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">Flicker of First Courage</div>
@@ -528,7 +479,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-resolve">Hope</span><span class="tag tf-resolve">Courage</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">Quiet Joy Between Heartbeats</div>
@@ -539,7 +490,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-warmth">Joy</span><span class="tag tf-still">Stillness</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">Quiet Joy Between Heartbeats</div>
@@ -550,7 +501,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-warmth">Joy</span><span class="tag tf-still">Stillness</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">Relief After the Storm</div>
@@ -561,7 +512,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-still">Release</span><span class="tag tf-still">Peace</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">Warm Pulse of a Forgotten Song</div>
@@ -572,7 +523,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-warmth">Comfort</span><span class="tag tf-warmth">Nostalgia</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">Warm Pulse of a Forgotten Song</div>
@@ -583,7 +534,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-warmth">Comfort</span><span class="tag tf-warmth">Nostalgia</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">Ache of Inevitable Change</div>
@@ -594,7 +545,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-other">Sadness</span><span class="tag tf-other">Growth</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">The Long Exhale</div>
@@ -605,7 +556,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Grief</span><span class="tag tf-still">Patience</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">The Long Exhale</div>
@@ -616,7 +567,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Grief</span><span class="tag tf-still">Patience</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">First Light After Dread</div>
@@ -627,7 +578,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Dread</span><span class="tag tf-motion">Wonder</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">The Hollow Before Dawn</div>
@@ -638,7 +589,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Despair</span><span class="tag tf-other">Isolation</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">Shimmer of Returning Light</div>
@@ -649,7 +600,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-resolve">Gratitude</span><span class="tag tf-warmth">Belonging</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">The Seed of Doubt</div>
@@ -660,7 +611,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-other">Doubt</span><span class="tag tf-tension">Shame</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">The Seed of Doubt</div>
@@ -671,7 +622,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-other">Doubt</span><span class="tag tf-tension">Shame</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">Veil of Acceptance</div>
@@ -682,7 +633,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-resolve">Acceptance</span><span class="tag tf-resolve">Hope</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">The Long Smoulder</div>
@@ -693,7 +644,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Anger</span><span class="tag tf-tension">Tension</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">The Long Smoulder</div>
@@ -704,7 +655,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Anger</span><span class="tag tf-tension">Tension</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Emotion"><div class="ci" style="background:rgba(155,89,216,0.13)">
     <div>
       <div class="ci-type">Emotion</div>
       <div class="ci-name">The Open Hand</div>
@@ -715,7 +666,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-resolve">Understanding</span><span class="tag tf-resolve">Acceptance</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character<span class="slot-pip"></span></div>
       <div class="ci-name">The Echochild</div>
@@ -726,7 +677,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Loneliness</span><span class="tag tf-other">Guidance</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 4 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character<span class="slot-pip"></span></div>
       <div class="ci-name">The Echochild</div>
@@ -737,7 +688,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Loneliness</span><span class="tag tf-other">Guidance</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 4 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character<span class="slot-pip"></span></div>
       <div class="ci-name">The Sleepless Witness</div>
@@ -748,7 +699,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-other">Awareness</span><span class="tag tf-tension">Fear</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 4 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character</div>
       <div class="ci-name">The Gentle Stranger</div>
@@ -759,7 +710,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-warmth">Comfort</span><span class="tag tf-other">Mystery</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character</div>
       <div class="ci-name">The Gentle Stranger</div>
@@ -770,7 +721,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-warmth">Comfort</span><span class="tag tf-other">Mystery</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character<span class="slot-pip"></span></div>
       <div class="ci-name">The Dusk Fawn</div>
@@ -781,7 +732,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-other">Shadow</span><span class="tag tf-still">Stillness</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 4 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character</div>
       <div class="ci-name">The Brambletail Mudscribe</div>
@@ -792,7 +743,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-motion">Curiosity</span><span class="tag tf-other">Connection</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character<span class="slot-pip"></span></div>
       <div class="ci-name">The Nightstrider Stag</div>
@@ -803,7 +754,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-resolve">Courage</span><span class="tag tf-still">Silence</span></div>
       <div class="ci-footer"><div class="ci-dp">3 CP · 5 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character</div>
       <div class="ci-name">The Goliath Pebbler</div>
@@ -814,7 +765,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-still">Patience</span><span class="tag tf-still">Stillness</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 4 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character</div>
       <div class="ci-name">The Dream Moth</div>
@@ -825,7 +776,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-motion">Wonder</span><span class="tag tf-motion">Curiosity</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character</div>
       <div class="ci-name">The Threshold Lurker</div>
@@ -836,7 +787,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Dread</span><span class="tag tf-other">Isolation</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character</div>
       <div class="ci-name">The Phosphor Crawler</div>
@@ -847,7 +798,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-still">Patience</span><span class="tag tf-other">Guidance</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character<span class="slot-pip"></span></div>
       <div class="ci-name">Emberling</div>
@@ -858,18 +809,18 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-motion">Wonder</span><span class="tag tf-warmth">Warmth</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character<span class="slot-pip"></span></div>
       <div class="ci-name">Emberwing</div>
       
     </div>
-    <div class="ci-action">Emotion Slot. Emberling also on board: draw 1, restore 2 CT on play.</div>
+    <div class="ci-action">Emotion Slot. Emberling also on board: draw 1, restore 2 CT.</div>
     <div>
       <div class="ci-tags"><span class="tag tf-other">Guidance</span><span class="tag tf-motion">Awe</span></div>
       <div class="ci-footer"><div class="ci-dp">3 CP · 5 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character</div>
       <div class="ci-name">The Nightmare Leech</div>
@@ -880,7 +831,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Dread</span><span class="tag tf-other">Isolation</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 4 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Character"><div class="ci" style="background:rgba(45,184,154,0.1)">
     <div>
       <div class="ci-type">Character</div>
       <div class="ci-name">The Whisperwing's Call</div>
@@ -891,18 +842,18 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-warmth">Belonging</span><span class="tag tf-resolve">Trust</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Setting"><div class="ci" style="background:rgba(30,100,160,0.15)">
     <div>
       <div class="ci-type">Setting<span class="slot-pip"></span></div>
       <div class="ci-name">Gloomshade Canopy</div>
       
     </div>
-    <div class="ci-action">Emotion Slot. +1 CP per bioluminescent creature card adjacent.</div>
+    <div class="ci-action">Emotion Slot. +1 CP per bioluminescent creature adjacent.</div>
     <div>
       <div class="ci-tags"><span class="tag tf-motion">Wonder</span><span class="tag tf-still">Stillness</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 4 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Setting"><div class="ci" style="background:rgba(30,100,160,0.15)">
     <div>
       <div class="ci-type">Setting</div>
       <div class="ci-name">Violet Expanse</div>
@@ -913,7 +864,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-warmth">Belonging</span><span class="tag tf-still">Peace</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Setting"><div class="ci" style="background:rgba(30,100,160,0.15)">
     <div>
       <div class="ci-type">Setting<span class="slot-pip"></span></div>
       <div class="ci-name">Prism Barrens</div>
@@ -924,7 +875,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-motion">Awe</span><span class="tag tf-other">Isolation</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Setting"><div class="ci" style="background:rgba(30,100,160,0.15)">
     <div>
       <div class="ci-type">Setting</div>
       <div class="ci-name">Moonshade Hollow</div>
@@ -935,7 +886,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-other">Mystery</span><span class="tag tf-still">Stillness</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Setting"><div class="ci" style="background:rgba(30,100,160,0.15)">
     <div>
       <div class="ci-type">Setting<span class="slot-pip"></span></div>
       <div class="ci-name">True Night</div>
@@ -946,7 +897,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-motion">Wonder</span><span class="tag tf-resolve">Clarity</span></div>
       <div class="ci-footer"><div class="ci-dp">3 CP · 5 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Setting"><div class="ci" style="background:rgba(30,100,160,0.15)">
     <div>
       <div class="ci-type">Setting</div>
       <div class="ci-name">The Null Zone</div>
@@ -957,7 +908,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-still">Silence</span><span class="tag tf-struct">Control</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 4 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Setting"><div class="ci" style="background:rgba(30,100,160,0.15)">
     <div>
       <div class="ci-type">Setting</div>
       <div class="ci-name">The Waking Edge</div>
@@ -968,7 +919,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Dread</span><span class="tag tf-other">Awareness</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Setting"><div class="ci" style="background:rgba(30,100,160,0.15)">
     <div>
       <div class="ci-type">Setting</div>
       <div class="ci-name">The Drowsy Fawn</div>
@@ -979,7 +930,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-warmth">Safety</span><span class="tag tf-warmth">Warmth</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Situation"><div class="ci" style="background:rgba(180,115,51,0.12)">
     <div>
       <div class="ci-type">Situation</div>
       <div class="ci-name">The Reversed Corridor</div>
@@ -990,7 +941,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-other">Confusion</span><span class="tag tf-other">Twist</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Situation"><div class="ci" style="background:rgba(180,115,51,0.12)">
     <div>
       <div class="ci-type">Situation</div>
       <div class="ci-name">Phase Threshold</div>
@@ -1001,7 +952,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-resolve">Clarity</span><span class="tag tf-struct">Process</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Situation"><div class="ci" style="background:rgba(180,115,51,0.12)">
     <div>
       <div class="ci-type">Situation</div>
       <div class="ci-name">Resonance Cascade</div>
@@ -1012,7 +963,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-motion">Wonder</span><span class="tag tf-motion">Awe</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 4 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Situation"><div class="ci" style="background:rgba(180,115,51,0.12)">
     <div>
       <div class="ci-type">Situation</div>
       <div class="ci-name">Dream Drift</div>
@@ -1023,7 +974,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-motion">Curiosity</span><span class="tag tf-other">Mystery</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Situation"><div class="ci" style="background:rgba(180,115,51,0.12)">
     <div>
       <div class="ci-type">Situation</div>
       <div class="ci-name">Veil Crossing</div>
@@ -1034,7 +985,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Dread</span><span class="tag tf-resolve">Hope</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Situation"><div class="ci" style="background:rgba(180,115,51,0.12)">
     <div>
       <div class="ci-type">Situation</div>
       <div class="ci-name">Harmonic Lock</div>
@@ -1045,7 +996,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-resolve">Trust</span><span class="tag tf-warmth">Belonging</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 4 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Situation"><div class="ci" style="background:rgba(180,115,51,0.12)">
     <div>
       <div class="ci-type">Situation</div>
       <div class="ci-name">Nocturnal Pressure</div>
@@ -1056,7 +1007,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-tension">Tension</span><span class="tag tf-tension">Anxiety</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Object"><div class="ci" style="background:rgba(60,130,80,0.12)">
     <div>
       <div class="ci-type">Object</div>
       <div class="ci-name">The Fractal Feather</div>
@@ -1067,7 +1018,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-motion">Lightness</span><span class="tag tf-motion">Curiosity</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Object"><div class="ci" style="background:rgba(60,130,80,0.12)">
     <div>
       <div class="ci-type">Object</div>
       <div class="ci-name">The Fractal Feather</div>
@@ -1078,7 +1029,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-motion">Lightness</span><span class="tag tf-motion">Curiosity</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Object"><div class="ci" style="background:rgba(60,130,80,0.12)">
     <div>
       <div class="ci-type">Object</div>
       <div class="ci-name">Veilmoss Fragment</div>
@@ -1089,7 +1040,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-other">Mystery</span><span class="tag tf-still">Peace</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Object"><div class="ci" style="background:rgba(60,130,80,0.12)">
     <div>
       <div class="ci-type">Object</div>
       <div class="ci-name">Dream Spore</div>
@@ -1100,7 +1051,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-other">Growth</span><span class="tag tf-motion">Wonder</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Object"><div class="ci" style="background:rgba(60,130,80,0.12)">
     <div>
       <div class="ci-type">Object</div>
       <div class="ci-name">True Night Bloom</div>
@@ -1111,7 +1062,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-resolve">Clarity</span><span class="tag tf-still">Stillness</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Object"><div class="ci" style="background:rgba(60,130,80,0.12)">
     <div>
       <div class="ci-type">Object</div>
       <div class="ci-name">Emotional Residue</div>
@@ -1122,7 +1073,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-warmth">Nostalgia</span><span class="tag tf-tension">Grief</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Object"><div class="ci" style="background:rgba(60,130,80,0.12)">
     <div>
       <div class="ci-type">Object</div>
       <div class="ci-name">Deep Frequency</div>
@@ -1133,7 +1084,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-motion">Awe</span><span class="tag tf-resolve">Trust</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Resolution"><div class="ci" style="background:rgba(45,184,154,0.18)">
     <div>
       <div class="ci-type">Resolution</div>
       <div class="ci-name">Lucid Bloom</div>
@@ -1144,7 +1095,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-still">Peace</span><span class="tag tf-still">Release</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 5 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Resolution"><div class="ci" style="background:rgba(45,184,154,0.18)">
     <div>
       <div class="ci-type">Resolution</div>
       <div class="ci-name">Naming the Feeling</div>
@@ -1155,7 +1106,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-resolve">Acceptance</span><span class="tag tf-resolve">Clarity</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 4 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Resolution"><div class="ci" style="background:rgba(45,184,154,0.18)">
     <div>
       <div class="ci-type">Resolution</div>
       <div class="ci-name">The Long Return</div>
@@ -1166,7 +1117,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-resolve">Gratitude</span><span class="tag tf-still">Peace</span></div>
       <div class="ci-footer"><div class="ci-dp">1 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card"><div class="ci">
+  </div></div><div class="h-card cat-Resolution"><div class="ci" style="background:rgba(45,184,154,0.18)">
     <div>
       <div class="ci-type">Resolution</div>
       <div class="ci-name">Still Waters</div>
@@ -1177,77 +1128,77 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
       <div class="ci-tags"><span class="tag tf-still">Stillness</span><span class="tag tf-resolve">Trust</span></div>
       <div class="ci-footer"><div class="ci-dp">2 CP · 4 DP</div></div>
     </div>
-  </div></div><div class="h-card dis"><div class="ci">
+  </div></div><div class="h-card cat-Disturbance"><div class="ci" style="background:rgba(180,40,40,0.18)">
     <div>
       <div class="ci-type">Disturbance</div>
       <div class="ci-name">The Ash-Laced Whisper</div>
-      <div class="ci-ct-drain">▼ 2 CT on placement</div>
+      <div class="ci-ct">▼ 2 CT on placement</div>
     </div>
     <div class="ci-action">Suppresses synergy in target position until resolved.</div>
     <div>
       <div class="ci-tags"><span class="tag tf-tension">Grief</span><span class="tag tf-tension">Disruption</span></div>
       <div class="ci-footer"><div class="ci-dp">-2 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card dis"><div class="ci">
+  </div></div><div class="h-card cat-Disturbance"><div class="ci" style="background:rgba(180,40,40,0.18)">
     <div>
       <div class="ci-type">Disturbance</div>
       <div class="ci-name">The Ash-Laced Whisper</div>
-      <div class="ci-ct-drain">▼ 2 CT on placement</div>
+      <div class="ci-ct">▼ 2 CT on placement</div>
     </div>
     <div class="ci-action">Suppresses synergy in target position until resolved.</div>
     <div>
       <div class="ci-tags"><span class="tag tf-tension">Grief</span><span class="tag tf-tension">Disruption</span></div>
       <div class="ci-footer"><div class="ci-dp">-2 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card dis"><div class="ci">
+  </div></div><div class="h-card cat-Disturbance"><div class="ci" style="background:rgba(180,40,40,0.18)">
     <div>
       <div class="ci-type">Disturbance</div>
       <div class="ci-name">Fractured Lullaby</div>
-      <div class="ci-ct-drain">▼ 2 CT on placement</div>
+      <div class="ci-ct">▼ 2 CT on placement</div>
     </div>
     <div class="ci-action">-1 CP on adjacent synergy pairs while unresolved.</div>
     <div>
       <div class="ci-tags"><span class="tag tf-tension">Dissonance</span><span class="tag tf-other">Loss</span></div>
       <div class="ci-footer"><div class="ci-dp">-2 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card dis"><div class="ci">
+  </div></div><div class="h-card cat-Disturbance"><div class="ci" style="background:rgba(180,40,40,0.18)">
     <div>
       <div class="ci-type">Disturbance</div>
       <div class="ci-name">Nightmare Leech</div>
-      <div class="ci-ct-drain">▼ 3 CT on placement</div>
+      <div class="ci-ct">▼ 3 CT on placement</div>
     </div>
     <div class="ci-action">Fear/Dread tags on opponent board: -1 CP instead of synergy.</div>
     <div>
       <div class="ci-tags"><span class="tag tf-tension">Dread</span><span class="tag tf-tension">Fear</span></div>
       <div class="ci-footer"><div class="ci-dp">-2 CP · 3 DP</div></div>
     </div>
-  </div></div><div class="h-card dis"><div class="ci">
+  </div></div><div class="h-card cat-Disturbance"><div class="ci" style="background:rgba(180,40,40,0.18)">
     <div>
       <div class="ci-type">Disturbance</div>
       <div class="ci-name">Signal Decay</div>
-      <div class="ci-ct-drain">▼ 1 CT on placement</div>
+      <div class="ci-ct">▼ 1 CT on placement</div>
     </div>
     <div class="ci-action">Suppresses one chosen tag on target card for 2 turns.</div>
     <div>
       <div class="ci-tags"><span class="tag tf-other">Doubt</span><span class="tag tf-other">Loss</span></div>
       <div class="ci-footer"><div class="ci-dp">-2 CP · 2 DP</div></div>
     </div>
-  </div></div><div class="h-card dis"><div class="ci">
+  </div></div><div class="h-card cat-Disturbance"><div class="ci" style="background:rgba(180,40,40,0.18)">
     <div>
       <div class="ci-type">Disturbance</div>
       <div class="ci-name">Lingering Unease</div>
-      <div class="ci-ct-drain">▼ 1 CT on placement</div>
+      <div class="ci-ct">▼ 1 CT on placement</div>
     </div>
     <div class="ci-action">Reduces opponent card plays by 1 on their next turn.</div>
     <div>
       <div class="ci-tags"><span class="tag tf-other">Doubt</span><span class="tag tf-tension">Disruption</span></div>
       <div class="ci-footer"><div class="ci-dp">-2 CP · 1 DP</div></div>
     </div>
-  </div></div><div class="h-card dis"><div class="ci">
+  </div></div><div class="h-card cat-Disturbance"><div class="ci" style="background:rgba(180,40,40,0.18)">
     <div>
       <div class="ci-type">Disturbance</div>
       <div class="ci-name">Nocturnal Pressure</div>
-      <div class="ci-ct-drain">▼ 2 CT on placement</div>
+      <div class="ci-ct">▼ 2 CT on placement</div>
     </div>
     <div class="ci-action">-1 synergy on adjacent cards until resolved.</div>
     <div>
@@ -1262,6 +1213,7 @@ body{background:var(--bg);font-family:'Crimson Pro',Georgia,serif;color:var(--pa
 <div class="footer">Oneirium — The Helena Flinn Chronicles — Little Lights Studio GmbH</div>
 
 <script>
+/* ── TAG FAMILY ── */
 const TF={
   Fear:'tension',Anxiety:'tension',Dread:'tension',Grief:'tension',Shame:'tension',
   Loneliness:'tension',Anger:'tension',Despair:'tension',Tension:'tension',
@@ -1275,6 +1227,7 @@ const TF={
 };
 function tf(t){return'tf-'+(TF[t]||'other');}
 
+/* ── TRANSITIONS ── */
 const TRANS=[
   {f:'Fear',t:'Courage',e:'Draw 1 card'},{f:'Grief',t:'Release',e:'Remove a Disturbance'},
   {f:'Anxiety',t:'Stillness',e:'+2 CT'},{f:'Loneliness',t:'Connection',e:'+2 CT'},
@@ -1284,154 +1237,131 @@ const TRANS=[
   {f:'Isolation',t:'Belonging',e:'+3 CP'},{f:'Doubt',t:'Trust',e:'Double adjacent synergy'},
 ];
 
+/* ── FULL 60-CARD BASE SET ── */
 const ALL=[
-  {id:1,type:'Emotion',name:'The Weight of Unspoken Fear',tags:['Fear','Anxiety'],cp:1,dp:2,action:null},
-  {id:2,type:'Emotion',name:'The Weight of Unspoken Fear',tags:['Fear','Anxiety'],cp:1,dp:2,action:null},
-  {id:3,type:'Emotion',name:'Flicker of First Courage',tags:['Hope','Courage'],cp:1,dp:3,action:null},
-  {id:4,type:'Emotion',name:'Flicker of First Courage',tags:['Hope','Courage'],cp:1,dp:3,action:null},
-  {id:5,type:'Emotion',name:'Quiet Joy Between Heartbeats',tags:['Joy','Stillness'],cp:1,dp:2,action:null},
-  {id:6,type:'Emotion',name:'Quiet Joy Between Heartbeats',tags:['Joy','Stillness'],cp:1,dp:2,action:null},
-  {id:7,type:'Emotion',name:'Relief After the Storm',tags:['Release','Peace'],cp:2,dp:3,action:null},
-  {id:8,type:'Emotion',name:'Warm Pulse of a Forgotten Song',tags:['Comfort','Nostalgia'],cp:1,dp:2,action:null},
-  {id:9,type:'Emotion',name:'Warm Pulse of a Forgotten Song',tags:['Comfort','Nostalgia'],cp:1,dp:2,action:null},
-  {id:10,type:'Emotion',name:'Ache of Inevitable Change',tags:['Sadness','Growth'],cp:2,dp:3,action:null},
-  {id:11,type:'Emotion',name:'The Long Exhale',tags:['Grief','Patience'],cp:1,dp:2,action:null},
-  {id:12,type:'Emotion',name:'The Long Exhale',tags:['Grief','Patience'],cp:1,dp:2,action:null},
-  {id:13,type:'Emotion',name:'First Light After Dread',tags:['Dread','Wonder'],cp:2,dp:3,action:null},
-  {id:14,type:'Emotion',name:'The Hollow Before Dawn',tags:['Despair','Isolation'],cp:1,dp:2,action:null},
-  {id:15,type:'Emotion',name:'Shimmer of Returning Light',tags:['Gratitude','Belonging'],cp:2,dp:3,action:null},
-  {id:16,type:'Emotion',name:'The Seed of Doubt',tags:['Doubt','Shame'],cp:1,dp:2,action:null},
-  {id:17,type:'Emotion',name:'The Seed of Doubt',tags:['Doubt','Shame'],cp:1,dp:2,action:null},
-  {id:18,type:'Emotion',name:'Veil of Acceptance',tags:['Acceptance','Hope'],cp:2,dp:3,action:null},
-  {id:19,type:'Emotion',name:'The Long Smoulder',tags:['Anger','Tension'],cp:1,dp:2,action:null},
-  {id:20,type:'Emotion',name:'The Long Smoulder',tags:['Anger','Tension'],cp:1,dp:2,action:null},
-  {id:21,type:'Emotion',name:'The Open Hand',tags:['Understanding','Acceptance'],cp:2,dp:3,action:null},
-  {id:22,type:'Character',name:'The Echochild',tags:['Loneliness','Guidance'],cp:2,dp:4,slot:true,action:'Emotion Slot. Matching attached Emotion tag: +2 synergy.'},
-  {id:23,type:'Character',name:'The Echochild',tags:['Loneliness','Guidance'],cp:2,dp:4,slot:true,action:'Emotion Slot. Matching attached Emotion tag: +2 synergy.'},
-  {id:24,type:'Character',name:'The Sleepless Witness',tags:['Awareness','Fear'],cp:2,dp:4,slot:true,action:'Emotion Slot. Board 4+ cards: draw 1 card.'},
-  {id:25,type:'Character',name:'The Gentle Stranger',tags:['Comfort','Mystery'],cp:1,dp:3,action:'Adjacent to Loneliness tag: restore 1 CT on play.'},
-  {id:26,type:'Character',name:'The Gentle Stranger',tags:['Comfort','Mystery'],cp:1,dp:3,action:'Adjacent to Loneliness tag: restore 1 CT on play.'},
-  {id:27,type:'Character',name:'The Dusk Fawn',tags:['Shadow','Stillness'],cp:2,dp:4,slot:true,action:'Emotion Slot. Cannot be targeted by Disturbances on turn played.'},
-  {id:28,type:'Character',name:'The Brambletail Mudscribe',tags:['Curiosity','Connection'],cp:2,dp:3,action:'On play: reveal top deck card, place at either end of row.'},
-  {id:29,type:'Character',name:'The Nightstrider Stag',tags:['Courage','Silence'],cp:3,dp:5,slot:true,action:"Emotion Slot. While on board: opponent's Disturbance cap -1."},
-  {id:30,type:'Character',name:'The Goliath Pebbler',tags:['Patience','Stillness'],cp:2,dp:4,action:'Discard 1 card to block incoming Disturbance.'},
-  {id:31,type:'Character',name:'The Dream Moth',tags:['Wonder','Curiosity'],cp:1,dp:2,action:'On play: +1 synergy per Wonder tag already on board.'},
-  {id:32,type:'Character',name:'The Threshold Lurker',tags:['Dread','Isolation'],cp:1,dp:3,action:'(Card action TBD)'},
-  {id:33,type:'Character',name:'The Phosphor Crawler',tags:['Patience','Guidance'],cp:1,dp:2,action:'On play: restore 1 CT.'},
-  {id:34,type:'Character',name:'Emberling',tags:['Wonder','Warmth'],cp:1,dp:3,slot:true,action:"Emotion Slot. Emberwing also on board: this card's CP doubles."},
-  {id:35,type:'Character',name:'Emberwing',tags:['Guidance','Awe'],cp:3,dp:5,slot:true,action:'Emotion Slot. Emberling also on board: draw 1, restore 2 CT on play.'},
-  {id:36,type:'Character',name:'The Nightmare Leech',tags:['Dread','Isolation'],cp:2,dp:4,action:"While on your board: opponent's Disturbance CT drain -1."},
-  {id:37,type:'Character',name:"The Whisperwing's Call",tags:['Belonging','Trust'],cp:2,dp:3,action:'Isolation or Doubt on board: restore 1 CT on play.'},
-  {id:38,type:'Setting',name:'Gloomshade Canopy',tags:['Wonder','Stillness'],cp:2,dp:4,slot:true,action:'Emotion Slot. +1 CP per bioluminescent creature card adjacent.'},
-  {id:39,type:'Setting',name:'Violet Expanse',tags:['Belonging','Peace'],cp:2,dp:3,action:'While on board: Warmth & Comfort on adjacent cards +1 extra synergy.'},
-  {id:40,type:'Setting',name:'Prism Barrens',tags:['Awe','Isolation'],cp:2,dp:3,slot:true,action:'Emotion Slot. Adjacent Structure or Control tags: +1 CP each.'},
-  {id:41,type:'Setting',name:'Moonshade Hollow',tags:['Mystery','Stillness'],cp:2,dp:3,action:'On play: look at top card of deck.'},
-  {id:42,type:'Setting',name:'True Night',tags:['Wonder','Clarity'],cp:3,dp:5,slot:true,action:'Emotion Slot. +2 CP to all synergy pairs while on board.'},
-  {id:43,type:'Setting',name:'The Null Zone',tags:['Silence','Control'],cp:2,dp:4,action:'No Echo effects trigger within 2 positions of this card.'},
-  {id:44,type:'Setting',name:'The Waking Edge',tags:['Dread','Awareness'],cp:1,dp:3,action:'(Card action TBD)'},
-  {id:45,type:'Setting',name:'The Drowsy Fawn',tags:['Safety','Warmth'],cp:2,dp:3,action:'First resolved Disturbance each game restores 1 extra CT.'},
-  {id:46,type:'Situation',name:'The Reversed Corridor',tags:['Confusion','Twist'],cp:1,dp:3,action:'On play: swap two adjacent cards on your board.'},
-  {id:47,type:'Situation',name:'Phase Threshold',tags:['Clarity','Process'],cp:2,dp:3,action:'Transition completes this turn: Echo triggers twice.'},
-  {id:48,type:'Situation',name:'Resonance Cascade',tags:['Wonder','Awe'],cp:2,dp:4,action:'On play: all matching tag pairs on board +1 bonus CP.'},
-  {id:49,type:'Situation',name:'Dream Drift',tags:['Curiosity','Mystery'],cp:1,dp:2,action:'Draw 1. Drawn card shares a tag with board card: play it free.'},
-  {id:50,type:'Situation',name:'Veil Crossing',tags:['Dread','Hope'],cp:2,dp:3,action:'On play: opponent discards 1 card.'},
-  {id:51,type:'Situation',name:'Harmonic Lock',tags:['Trust','Belonging'],cp:2,dp:4,action:'Adjacent to completed transition: cannot be broken by Disturbances.'},
-  {id:52,type:'Situation',name:'Nocturnal Pressure',tags:['Tension','Anxiety'],cp:1,dp:3,action:"Soft Disturbance on opponent's board: -1 CT, -1 adjacent synergy until resolved."},
-  {id:53,type:'Object',name:'The Fractal Feather',tags:['Lightness','Curiosity'],cp:1,dp:3,action:'Between matching-tag cards: duplicate that synergy pair bonus.'},
-  {id:54,type:'Object',name:'The Fractal Feather',tags:['Lightness','Curiosity'],cp:1,dp:3,action:'Between matching-tag cards: duplicate that synergy pair bonus.'},
-  {id:55,type:'Object',name:'Veilmoss Fragment',tags:['Mystery','Peace'],cp:1,dp:2,action:'On play: restore 1 CT.'},
-  {id:56,type:'Object',name:'Dream Spore',tags:['Growth','Wonder'],cp:1,dp:2,action:'On play: draw 1 card.'},
-  {id:57,type:'Object',name:'True Night Bloom',tags:['Clarity','Stillness'],cp:2,dp:3,action:'Once per game: transition completes, +1 CP bonus.'},
-  {id:58,type:'Object',name:'Emotional Residue',tags:['Nostalgia','Grief'],cp:1,dp:2,action:'Adjacent to Resolution: that Resolution restores +1 extra CT.'},
-  {id:59,type:'Object',name:'Deep Frequency',tags:['Awe','Trust'],cp:2,dp:3,action:'While on board: Doubt\u2192Trust transition scores +1 extra CP.'},
-  {id:60,type:'Resolution',name:'Lucid Bloom',tags:['Peace','Release'],cp:2,dp:5,action:'Remove 1 Disturbance. Had Grief/Fear tag: +3 CP.'},
-  {id:61,type:'Resolution',name:'Naming the Feeling',tags:['Acceptance','Clarity'],cp:2,dp:4,action:'Remove 1 Disturbance. Prevents emotional contradiction collapse.'},
-  {id:62,type:'Resolution',name:'The Long Return',tags:['Gratitude','Peace'],cp:1,dp:3,action:'Remove 1 Disturbance. Restore 2 CT.'},
-  {id:63,type:'Resolution',name:'Still Waters',tags:['Stillness','Trust'],cp:2,dp:4,action:'Remove 1 Disturbance. No CT drain on next Disturbance received.'},
-  {id:64,type:'Disturbance',name:'The Ash-Laced Whisper',tags:['Grief','Disruption'],cp:-2,dp:-2,ct:-2,action:'Suppresses synergy in target position until resolved.'},
-  {id:65,type:'Disturbance',name:'The Ash-Laced Whisper',tags:['Grief','Disruption'],cp:-2,dp:-2,ct:-2,action:'Suppresses synergy in target position until resolved.'},
-  {id:66,type:'Disturbance',name:'Fractured Lullaby',tags:['Dissonance','Loss'],cp:-2,dp:-2,ct:-2,action:'-1 CP on adjacent synergy pairs while unresolved.'},
-  {id:67,type:'Disturbance',name:'Nightmare Leech',tags:['Dread','Fear'],cp:-2,dp:-3,ct:-3,action:'Fear/Dread tags on opponent board: -1 CP instead of synergy.'},
-  {id:68,type:'Disturbance',name:'Signal Decay',tags:['Doubt','Loss'],cp:-2,dp:-2,ct:-1,action:'Suppresses one chosen tag on target card for 2 turns.'},
-  {id:69,type:'Disturbance',name:'Lingering Unease',tags:['Doubt','Disruption'],cp:-2,dp:-1,ct:-1,action:'Reduces opponent card plays by 1 on their next turn.'},
-  {id:70,type:'Disturbance',name:'Nocturnal Pressure',tags:['Tension','Anxiety'],cp:-2,dp:-2,ct:-2,action:'-1 synergy on adjacent cards until resolved.'},
+  {id:1, type:'Emotion',   name:'The Weight of Unspoken Fear',      tags:['Fear','Anxiety'],          cp:1, dp:2,  action:null},
+  {id:2, type:'Emotion',   name:'The Weight of Unspoken Fear',      tags:['Fear','Anxiety'],          cp:1, dp:2,  action:null},
+  {id:3, type:'Emotion',   name:'Flicker of First Courage',         tags:['Hope','Courage'],          cp:1, dp:3,  action:null},
+  {id:4, type:'Emotion',   name:'Flicker of First Courage',         tags:['Hope','Courage'],          cp:1, dp:3,  action:null},
+  {id:5, type:'Emotion',   name:'Quiet Joy Between Heartbeats',     tags:['Joy','Stillness'],         cp:1, dp:2,  action:null},
+  {id:6, type:'Emotion',   name:'Quiet Joy Between Heartbeats',     tags:['Joy','Stillness'],         cp:1, dp:2,  action:null},
+  {id:7, type:'Emotion',   name:'Relief After the Storm',           tags:['Release','Peace'],         cp:2, dp:3,  action:null},
+  {id:8, type:'Emotion',   name:'Warm Pulse of a Forgotten Song',   tags:['Comfort','Nostalgia'],     cp:1, dp:2,  action:null},
+  {id:9, type:'Emotion',   name:'Warm Pulse of a Forgotten Song',   tags:['Comfort','Nostalgia'],     cp:1, dp:2,  action:null},
+  {id:10,type:'Emotion',   name:'Ache of Inevitable Change',        tags:['Sadness','Growth'],        cp:2, dp:3,  action:null},
+  {id:11,type:'Emotion',   name:'The Long Exhale',                  tags:['Grief','Patience'],        cp:1, dp:2,  action:null},
+  {id:12,type:'Emotion',   name:'The Long Exhale',                  tags:['Grief','Patience'],        cp:1, dp:2,  action:null},
+  {id:13,type:'Emotion',   name:'First Light After Dread',          tags:['Dread','Wonder'],          cp:2, dp:3,  action:null},
+  {id:14,type:'Emotion',   name:'The Hollow Before Dawn',           tags:['Despair','Isolation'],     cp:1, dp:2,  action:null},
+  {id:15,type:'Emotion',   name:'Shimmer of Returning Light',       tags:['Gratitude','Belonging'],   cp:2, dp:3,  action:null},
+  {id:16,type:'Emotion',   name:'The Seed of Doubt',                tags:['Doubt','Shame'],           cp:1, dp:2,  action:null},
+  {id:17,type:'Emotion',   name:'The Seed of Doubt',                tags:['Doubt','Shame'],           cp:1, dp:2,  action:null},
+  {id:18,type:'Emotion',   name:'Veil of Acceptance',               tags:['Acceptance','Hope'],       cp:2, dp:3,  action:null},
+  {id:19,type:'Emotion',   name:'The Long Smoulder',                tags:['Anger','Tension'],         cp:1, dp:2,  action:null},
+  {id:20,type:'Emotion',   name:'The Long Smoulder',                tags:['Anger','Tension'],         cp:1, dp:2,  action:null},
+  {id:21,type:'Emotion',   name:'The Open Hand',                    tags:['Understanding','Acceptance'],cp:2,dp:3,  action:null},
+  {id:22,type:'Character', name:'The Echochild',                    tags:['Loneliness','Guidance'],   cp:2, dp:4,  slot:true, action:'Emotion Slot. Matching attached Emotion tag: +2 synergy.'},
+  {id:23,type:'Character', name:'The Echochild',                    tags:['Loneliness','Guidance'],   cp:2, dp:4,  slot:true, action:'Emotion Slot. Matching attached Emotion tag: +2 synergy.'},
+  {id:24,type:'Character', name:'The Sleepless Witness',            tags:['Awareness','Fear'],        cp:2, dp:4,  slot:true, action:'Emotion Slot. Board 4+ cards: draw 1 card.'},
+  {id:25,type:'Character', name:'The Gentle Stranger',              tags:['Comfort','Mystery'],       cp:1, dp:3,  action:'Adjacent to Loneliness tag: restore 1 CT on play.'},
+  {id:26,type:'Character', name:'The Gentle Stranger',              tags:['Comfort','Mystery'],       cp:1, dp:3,  action:'Adjacent to Loneliness tag: restore 1 CT on play.'},
+  {id:27,type:'Character', name:'The Dusk Fawn',                    tags:['Shadow','Stillness'],      cp:2, dp:4,  slot:true, action:'Emotion Slot. Cannot be targeted by Disturbances on turn played.'},
+  {id:28,type:'Character', name:'The Brambletail Mudscribe',        tags:['Curiosity','Connection'],  cp:2, dp:3,  action:'On play: reveal top deck card, place at either end of row.'},
+  {id:29,type:'Character', name:'The Nightstrider Stag',            tags:['Courage','Silence'],       cp:3, dp:5,  slot:true, action:"Emotion Slot. While on board: opponent's Disturbance cap -1."},
+  {id:30,type:'Character', name:'The Goliath Pebbler',              tags:['Patience','Stillness'],    cp:2, dp:4,  action:'Discard 1 card to block incoming Disturbance.'},
+  {id:31,type:'Character', name:'The Dream Moth',                   tags:['Wonder','Curiosity'],      cp:1, dp:2,  action:'On play: +1 synergy per Wonder tag already on board.'},
+  {id:32,type:'Character', name:'The Threshold Lurker',             tags:['Dread','Isolation'],       cp:1, dp:3,  action:'(Card action TBD)'},
+  {id:33,type:'Character', name:'The Phosphor Crawler',             tags:['Patience','Guidance'],     cp:1, dp:2,  action:'On play: restore 1 CT.'},
+  {id:34,type:'Character', name:'Emberling',                        tags:['Wonder','Warmth'],         cp:1, dp:3,  slot:true, action:"Emotion Slot. Emberwing also on board: this card's CP doubles."},
+  {id:35,type:'Character', name:'Emberwing',                        tags:['Guidance','Awe'],          cp:3, dp:5,  slot:true, action:'Emotion Slot. Emberling also on board: draw 1, restore 2 CT.'},
+  {id:36,type:'Character', name:'The Nightmare Leech',              tags:['Dread','Isolation'],       cp:2, dp:4,  action:"While on your board: opponent's Disturbance CT drain -1."},
+  {id:37,type:'Character', name:"The Whisperwing's Call",           tags:['Belonging','Trust'],       cp:2, dp:3,  action:'Isolation or Doubt on board: restore 1 CT on play.'},
+  {id:38,type:'Setting',   name:'Gloomshade Canopy',                tags:['Wonder','Stillness'],      cp:2, dp:4,  slot:true, action:'Emotion Slot. +1 CP per bioluminescent creature adjacent.'},
+  {id:39,type:'Setting',   name:'Violet Expanse',                   tags:['Belonging','Peace'],       cp:2, dp:3,  action:'While on board: Warmth & Comfort on adjacent cards +1 extra synergy.'},
+  {id:40,type:'Setting',   name:'Prism Barrens',                    tags:['Awe','Isolation'],         cp:2, dp:3,  slot:true, action:'Emotion Slot. Adjacent Structure or Control tags: +1 CP each.'},
+  {id:41,type:'Setting',   name:'Moonshade Hollow',                 tags:['Mystery','Stillness'],     cp:2, dp:3,  action:'On play: look at top card of deck.'},
+  {id:42,type:'Setting',   name:'True Night',                       tags:['Wonder','Clarity'],        cp:3, dp:5,  slot:true, action:'Emotion Slot. +2 CP to all synergy pairs while on board.'},
+  {id:43,type:'Setting',   name:'The Null Zone',                    tags:['Silence','Control'],       cp:2, dp:4,  action:'No Echo effects trigger within 2 positions of this card.'},
+  {id:44,type:'Setting',   name:'The Waking Edge',                  tags:['Dread','Awareness'],       cp:1, dp:3,  action:'(Card action TBD)'},
+  {id:45,type:'Setting',   name:'The Drowsy Fawn',                  tags:['Safety','Warmth'],         cp:2, dp:3,  action:'First resolved Disturbance each game restores 1 extra CT.'},
+  {id:46,type:'Situation', name:'The Reversed Corridor',            tags:['Confusion','Twist'],       cp:1, dp:3,  action:'On play: swap two adjacent cards on your board.'},
+  {id:47,type:'Situation', name:'Phase Threshold',                  tags:['Clarity','Process'],       cp:2, dp:3,  action:'Transition completes this turn: Echo triggers twice.'},
+  {id:48,type:'Situation', name:'Resonance Cascade',                tags:['Wonder','Awe'],            cp:2, dp:4,  action:'On play: all matching tag pairs on board +1 bonus CP.'},
+  {id:49,type:'Situation', name:'Dream Drift',                      tags:['Curiosity','Mystery'],     cp:1, dp:2,  action:'Draw 1. Drawn card shares a tag with board card: play it free.'},
+  {id:50,type:'Situation', name:'Veil Crossing',                    tags:['Dread','Hope'],            cp:2, dp:3,  action:'On play: opponent discards 1 card.'},
+  {id:51,type:'Situation', name:'Harmonic Lock',                    tags:['Trust','Belonging'],       cp:2, dp:4,  action:'Adjacent to completed transition: cannot be broken by Disturbances.'},
+  {id:52,type:'Situation', name:'Nocturnal Pressure',               tags:['Tension','Anxiety'],       cp:1, dp:3,  action:"Soft Disturbance on opponent's board: -1 CT, -1 adjacent synergy until resolved."},
+  {id:53,type:'Object',    name:'The Fractal Feather',              tags:['Lightness','Curiosity'],   cp:1, dp:3,  action:'Between matching-tag cards: duplicate that synergy pair bonus.'},
+  {id:54,type:'Object',    name:'The Fractal Feather',              tags:['Lightness','Curiosity'],   cp:1, dp:3,  action:'Between matching-tag cards: duplicate that synergy pair bonus.'},
+  {id:55,type:'Object',    name:'Veilmoss Fragment',                tags:['Mystery','Peace'],         cp:1, dp:2,  action:'On play: restore 1 CT.'},
+  {id:56,type:'Object',    name:'Dream Spore',                      tags:['Growth','Wonder'],         cp:1, dp:2,  action:'On play: draw 1 card.'},
+  {id:57,type:'Object',    name:'True Night Bloom',                 tags:['Clarity','Stillness'],     cp:2, dp:3,  action:'Once per game: transition completes, +1 CP bonus.'},
+  {id:58,type:'Object',    name:'Emotional Residue',                tags:['Nostalgia','Grief'],       cp:1, dp:2,  action:'Adjacent to Resolution: that Resolution restores +1 extra CT.'},
+  {id:59,type:'Object',    name:'Deep Frequency',                   tags:['Awe','Trust'],             cp:2, dp:3,  action:'While on board: Doubt\u2192Trust transition scores +1 extra CP.'},
+  {id:60,type:'Resolution',name:'Lucid Bloom',                      tags:['Peace','Release'],         cp:2, dp:5,  action:'Remove 1 Disturbance. Had Grief/Fear tag: +3 CP.'},
+  {id:61,type:'Resolution',name:'Naming the Feeling',               tags:['Acceptance','Clarity'],    cp:2, dp:4,  action:'Remove 1 Disturbance. Prevents emotional contradiction collapse.'},
+  {id:62,type:'Resolution',name:'The Long Return',                  tags:['Gratitude','Peace'],       cp:1, dp:3,  action:'Remove 1 Disturbance. Restore 2 CT.'},
+  {id:63,type:'Resolution',name:'Still Waters',                     tags:['Stillness','Trust'],       cp:2, dp:4,  action:'Remove 1 Disturbance. No CT drain on next Disturbance received.'},
+  {id:64,type:'Disturbance',name:'The Ash-Laced Whisper',           tags:['Grief','Disruption'],      cp:-2,dp:-2, ct:-2, action:'Suppresses synergy in target position until resolved.'},
+  {id:65,type:'Disturbance',name:'The Ash-Laced Whisper',           tags:['Grief','Disruption'],      cp:-2,dp:-2, ct:-2, action:'Suppresses synergy in target position until resolved.'},
+  {id:66,type:'Disturbance',name:'Fractured Lullaby',               tags:['Dissonance','Loss'],       cp:-2,dp:-2, ct:-2, action:'-1 CP on adjacent synergy pairs while unresolved.'},
+  {id:67,type:'Disturbance',name:'Nightmare Leech',                 tags:['Dread','Fear'],            cp:-2,dp:-3, ct:-3, action:'Fear/Dread tags on opponent board: -1 CP instead of synergy.'},
+  {id:68,type:'Disturbance',name:'Signal Decay',                    tags:['Doubt','Loss'],            cp:-2,dp:-2, ct:-1, action:'Suppresses one chosen tag on target card for 2 turns.'},
+  {id:69,type:'Disturbance',name:'Lingering Unease',                tags:['Doubt','Disruption'],      cp:-2,dp:-1, ct:-1, action:'Reduces opponent card plays by 1 on their next turn.'},
+  {id:70,type:'Disturbance',name:'Nocturnal Pressure',              tags:['Tension','Anxiety'],       cp:-2,dp:-2, ct:-2, action:'-1 synergy on adjacent cards until resolved.'},
 ];
 
 const CATS=['All','Emotion','Character','Setting','Situation','Object','Resolution','Disturbance'];
-const CT_MAX=15;
-let arc=[], deck=[], ct=CT_MAX, deckFilter='All', baseFilter='All';
+/* category bg colors for inline use */
+const CAT_COLOR={
+  Emotion:'rgba(155,89,216,0.13)',Character:'rgba(45,184,154,0.1)',
+  Setting:'rgba(30,100,160,0.15)',Situation:'rgba(180,115,51,0.12)',
+  Object:'rgba(60,130,80,0.12)',Resolution:'rgba(45,184,154,0.18)',
+  Disturbance:'rgba(180,40,40,0.18)'
+};
 
-/* ── CT LOGIC ── */
-function ctZone(v){
-  if(v<=0) return 'collapse';
-  if(v<=4) return 'critical';
-  if(v<=8) return 'unstable';
-  return 'stable';
-}
-function ctZoneLabel(v){
-  if(v<=0) return 'Collapsed';
-  if(v<=4) return 'Critical';
-  if(v<=8) return 'Unstable';
-  return 'Stable';
-}
-function ctEffects(v){
-  if(v<=0) return 'The dream has collapsed into nightmare.';
-  if(v<=4) return 'Critical: Unstable rules apply. Survive to Stable for +3 CP Resilience Bonus.';
-  if(v<=8) return 'Unstable: Max 1 card per turn. Opponent gains +1 CP on Disturbances placed.';
+let arc=[], deck=[], ct=15, deckF='All', baseF='All';
+const CT_MAX=15;
+
+/* ── CT ── */
+function ctZone(v){return v<=0?'collapse':v<=4?'critical':v<=8?'unstable':'stable';}
+function ctLabel(v){return v<=0?'Collapsed':v<=4?'Critical':v<=8?'Unstable':'Stable';}
+function ctFx(v){
+  if(v<=0) return 'The dream has collapsed.';
+  if(v<=4) return 'Critical: same as Unstable. Recover to Stable for +3 CP Resilience Bonus.';
+  if(v<=8) return 'Unstable: max 1 card per turn. Opponent +1 CP on Disturbances placed.';
   return 'Normal play. No modifiers.';
 }
-function ctColor(v){
-  if(v<=0) return '#ff4444';
-  if(v<=4) return 'var(--ct-critical)';
-  if(v<=8) return 'var(--ct-unstable)';
-  return 'var(--ct-stable)';
-}
-function drainCT(amount){
-  ct=Math.max(0,ct+amount);
-  renderCT();
-  if(ct<=0) setTimeout(()=>document.getElementById('collapse-overlay').classList.add('active'),300);
-}
-function restoreCT(amount){
-  ct=Math.min(CT_MAX,ct+amount);
-  renderCT();
-}
+function ctColor(v){return v<=0?'#ff4444':v<=4?'var(--ct-critical)':v<=8?'var(--ct-unstable)':'var(--ct-stable)';}
 function renderCT(){
   const v=ct;
-  document.getElementById('ct-number').textContent=v;
-  document.getElementById('ct-number').style.color=ctColor(v);
-  const zone=ctZone(v);
-  const badge=document.getElementById('ct-zone');
-  badge.className='ct-zone-badge ct-zone-'+zone;
-  badge.textContent=ctZoneLabel(v);
-  document.getElementById('ct-effects').textContent=ctEffects(v);
-  // pips
-  const track=document.getElementById('ct-track');
-  track.innerHTML='';
+  document.getElementById('ct-num').textContent=v;
+  document.getElementById('ct-num').style.color=ctColor(v);
+  const b=document.getElementById('ct-badge');
+  b.className='ct-badge ct-'+ctZone(v);
+  b.textContent=ctLabel(v);
+  document.getElementById('ct-fx').textContent=ctFx(v);
+  const tr=document.getElementById('ct-track');
+  tr.innerHTML='';
   for(let i=1;i<=CT_MAX;i++){
-    const pip=document.createElement('div');
-    pip.className='ct-pip';
-    if(i<=v){
-      if(v<=4)      pip.style.background='var(--ct-critical)';
-      else if(v<=8) pip.style.background='var(--ct-unstable)';
-      else          pip.style.background='var(--ct-stable)';
-    } else {
-      pip.style.background='rgba(255,255,255,0.07)';
-    }
-    track.appendChild(pip);
+    const p=document.createElement('div');p.className='ct-pip';
+    p.style.background=i<=v?ctColor(v):'rgba(255,255,255,0.07)';
+    tr.appendChild(p);
   }
 }
+function drainCT(a){ct=Math.max(0,ct+a);renderCT();if(ct<=0)setTimeout(()=>document.getElementById('col-ov').classList.add('active'),300);}
+function restoreCT(a){ct=Math.min(CT_MAX,ct+a);renderCT();}
 
 /* ── CARD HTML ── */
 function cardHTML(c){
   const tags=c.tags.map(t=>`<span class="tag ${tf(t)}">${t}</span>`).join('');
   const sl=c.slot?`<span class="slot-pip"></span>`:'';
   const isDis=c.type==='Disturbance';
-  const footer=isDis
-    ?`${c.cp} CP &middot; ${Math.abs(c.dp)} DP`
-    :`${c.cp} CP &middot; ${c.dp} DP`;
-  const ctLine=isDis?`<div class="ci-ct-drain">&#9660; ${Math.abs(c.ct)} CT on placement</div>`:'';
+  const footer=isDis?`${c.cp} CP &middot; ${Math.abs(c.dp)} DP`:`${c.cp} CP &middot; ${c.dp} DP`;
+  const ctLine=isDis?`<div class="ci-ct">&#9660; ${Math.abs(c.ct)} CT on placement</div>`:'';
   const act=c.action?`<div class="ci-action">${c.action}</div>`:`<div class="ci-action" style="flex:1"></div>`;
-  return `<div class="ci">
+  const bg=CAT_COLOR[c.type]||'transparent';
+  return `<div class="ci" style="background:${bg}">
     <div>
       <div class="ci-type">${c.type}${sl}</div>
       <div class="ci-name">${c.name}</div>
@@ -1448,32 +1378,33 @@ function cardHTML(c){
 /* ── SCORING ── */
 function calcScore(){
   if(!arc.length)return{total:0,base:0,syn:0,trans:0,arc_b:0,tr:[],sy:[]};
-  const nonDis=arc.filter(c=>c.type!=='Disturbance');
-  const base=nonDis.reduce((s,c)=>s+c.cp,0);
-  // count disturb CP penalties
-  const disP=arc.filter(c=>c.type==='Disturbance').reduce((s,c)=>s+c.cp,0);
+  /* base: positive cards only */
+  const base=arc.reduce((s,c)=>s+(c.cp>0?c.cp:0),0);
+  /* disturbance penalties */
+  const disPen=arc.filter(c=>c.type==='Disturbance').reduce((s,c)=>s+c.cp,0);
+  /* synergy: use ALL cards including disturbances (they sit on YOUR arc in sandbox) */
   const tc={};
-  nonDis.forEach(c=>c.tags.forEach(t=>tc[t]=(tc[t]||0)+1));
+  arc.forEach(c=>c.tags.forEach(t=>tc[t]=(tc[t]||0)+1));
   let syn=0;const sy=[];
   Object.entries(tc).forEach(([t,n])=>{if(n>1){const p=n*(n-1)/2;syn+=p;sy.push({t,n,p});}});
-  // transitions: each card tag can only serve one transition
-  const usedFrom=new Set(), usedTo=new Set();
+  /* transitions: all cards contribute tags, each tag used only once */
+  const bt=arc.map(c=>c.tags);
+  const usedF=new Set(),usedT=new Set();
   let tc2=0;const tr=[];
   TRANS.forEach(({f,t,e})=>{
-    if(usedFrom.has(f)||usedTo.has(t)) return;
-    const bt=nonDis.map(c=>c.tags);
+    if(usedF.has(f)||usedT.has(t))return;
     let fi=-1,ti=-1;
     bt.forEach((tags,i)=>{
-      if(tags.includes(f)&&fi===-1&&!usedFrom.has(f)) fi=i;
-      if(tags.includes(t)&&ti===-1&&!usedTo.has(t))   ti=i;
+      if(tags.includes(f)&&fi===-1)fi=i;
+      if(tags.includes(t)&&ti===-1)ti=i;
     });
     if(fi!==-1&&ti!==-1&&fi!==ti&&Math.abs(fi-ti)>=2){
       tc2++;tr.push({f,t,e});
-      usedFrom.add(f);usedTo.add(t);
+      usedF.add(f);usedT.add(t);
     }
   });
   const trans=tc2*3,arc_b=tc2>=3?5:0;
-  return{total:base+syn+trans+arc_b+disP,base,syn,trans,arc_b,tr,sy};
+  return{total:base+syn+trans+arc_b+disPen,base,syn,trans,arc_b,tr,sy,disPen};
 }
 
 function deckDP(){return deck.reduce((s,c)=>s+c.dp,0);}
@@ -1481,53 +1412,38 @@ function deckDP(){return deck.reduce((s,c)=>s+c.dp,0);}
 /* ── BUILD DECK ── */
 function buildDeck(){
   clearArc();deck=[];
-  const shuffled=[...ALL].sort(()=>Math.random()-.5);
-  const dists=shuffled.filter(c=>c.type==='Disturbance');
-  const others=shuffled.filter(c=>c.type!=='Disturbance');
+  const sh=[...ALL].sort(()=>Math.random()-.5);
+  const ds=sh.filter(c=>c.type==='Disturbance');
+  const ot=sh.filter(c=>c.type!=='Disturbance');
   let dp=0;
-  for(const c of dists){if(deck.filter(x=>x.type==='Disturbance').length>=(Math.floor(Math.random()*3)+4))break;deck.push(c);dp+=c.dp;}
-  for(const c of others){if(deck.length>=28)break;if(dp+c.dp<=100){deck.push(c);dp+=c.dp;}}
+  for(const c of ds){if(deck.filter(x=>x.type==='Disturbance').length>=(Math.floor(Math.random()*3)+4))break;deck.push(c);dp+=c.dp;}
+  for(const c of ot){if(deck.length>=28)break;if(dp+c.dp<=100){deck.push(c);dp+=c.dp;}}
   refresh();
 }
-
 function clearDeck(){arc=[];deck=[];ct=CT_MAX;renderCT();refresh();}
 function clearArc(){
-  // restore CT for any disturbances being removed
   arc.filter(c=>c.type==='Disturbance').forEach(c=>ct=Math.min(CT_MAX,ct+Math.abs(c.ct)));
   arc=[];renderCT();refresh();
 }
-function resetGame(){
-  document.getElementById('collapse-overlay').classList.remove('active');
-  arc=[];ct=CT_MAX;renderCT();refresh();
+function resetGame(){document.getElementById('col-ov').classList.remove('active');arc=[];ct=CT_MAX;renderCT();refresh();}
+function addToDeck(id){
+  if(deck.find(c=>c.id===id))return;
+  const c=ALL.find(x=>x.id===id);if(!c)return;
+  if(deckDP()+c.dp>100)return;
+  deck.push(c);refresh();
 }
-
-/* ── PLACE FROM DECK ── */
-function placeFromDeck(cardId){
+function placeFromDeck(id){
   if(arc.length>=12)return;
-  const card=deck.find(c=>c.id===cardId);
-  if(!card||arc.find(c=>c.id===cardId))return;
-  arc.push(card);
-  // drain CT immediately if Disturbance
-  if(card.type==='Disturbance') drainCT(card.ct);
+  const c=deck.find(x=>x.id===id);
+  if(!c||arc.find(x=>x.id===id))return;
+  arc.push(c);
+  if(c.type==='Disturbance')drainCT(c.ct);
   refresh();
 }
-
-/* ── REMOVE FROM ARC ── */
-function removeFromArc(idx){
-  const card=arc[idx];
-  // restore CT when disturbance is removed
-  if(card.type==='Disturbance') ct=Math.min(CT_MAX,ct+Math.abs(card.ct));
-  arc.splice(idx,1);
-  renderCT();
-  refresh();
-}
-
-function addToDeck(cardId){
-  if(deck.find(c=>c.id===cardId))return;
-  const card=ALL.find(c=>c.id===cardId);
-  if(!card)return;
-  if(deckDP()+card.dp>100)return;
-  deck.push(card);refresh();
+function removeFromArc(i){
+  const c=arc[i];
+  if(c.type==='Disturbance')ct=Math.min(CT_MAX,ct+Math.abs(c.ct));
+  arc.splice(i,1);renderCT();refresh();
 }
 
 /* ── RENDER ── */
@@ -1545,8 +1461,7 @@ function render(){
     s.sy.forEach(({t,n,p:pts})=>p.push(`${t}&times;${n} <span>+${pts}</span>`));
     s.tr.forEach(({f,t})=>p.push(`${f}&rarr;${t} <span>+3</span>`));
     if(s.arc_b)p.push(`Full arc <span>+5</span>`);
-    const disPen=arc.filter(c=>c.type==='Disturbance').reduce((a,c)=>a+c.cp,0);
-    if(disPen<0)p.push(`Disturbances <span>${disPen}</span>`);
+    if(s.disPen<0)p.push(`Disturbances <span>${s.disPen}</span>`);
     det.innerHTML=p.join(' &nbsp;&middot;&nbsp; ');
   }
   const hr=document.getElementById('hints-row');
@@ -1562,7 +1477,7 @@ function render(){
   arc.forEach((c,i)=>{
     if(i>0){const a=document.createElement('div');a.className='arr';a.textContent='\u203a';row.appendChild(a);}
     const el=document.createElement('div');
-    el.className='b-slot'+(c.type==='Disturbance'?' dis':'');
+    el.className='b-slot cat-'+c.type;
     el.innerHTML=`<span class="rm">remove</span>${cardHTML(c)}`;
     el.onclick=()=>removeFromArc(i);
     el.ondragover=e=>e.preventDefault();
@@ -1573,29 +1488,29 @@ function render(){
     if(arc.length>0){const a=document.createElement('div');a.className='arr';a.textContent='\u203a';row.appendChild(a);}
     const add=document.createElement('div');
     add.className='add-slot';
-    add.innerHTML='<span style="opacity:.3;font-size:.65rem;font-family:\'Cinzel\',serif;letter-spacing:.05em">drop</span>';
+    add.innerHTML='<span style="opacity:.28;font-size:.6rem;font-family:\'Cinzel\',serif">drop</span>';
     add.ondragover=e=>{e.preventDefault();add.classList.add('hot');};
     add.ondragleave=()=>add.classList.remove('hot');
     add.ondrop=e=>{e.preventDefault();add.classList.remove('hot');const id=parseInt(e.dataTransfer.getData('cid'));if(id)placeFromDeck(id);};
     row.appendChild(add);
   }
-  document.getElementById('arc-count').textContent=`${arc.length} / 12`;
+  document.getElementById('arc-cnt').textContent=`${arc.length} / 12`;
 
   /* DECK */
   const arcIds=arc.map(c=>c.id);
   const dg=document.getElementById('deck-grid');
   if(!deck.length){
-    dg.innerHTML='<div style="font-size:.8rem;color:var(--smoke);font-style:italic;padding:.5rem 0">Your deck is empty. Use Build Deck or add cards from the base set below.</div>';
+    dg.innerHTML='<div style="font-size:.8rem;color:var(--smoke);font-style:italic;padding:.4rem 0">Deck empty. Use Build Deck or add cards below.</div>';
   } else {
     dg.innerHTML='';
     deck.forEach(c=>{
       const inArc=arcIds.includes(c.id);
-      const hidden=deckFilter!=='All'&&c.type!==deckFilter;
+      const hidden=deckF!=='All'&&c.type!==deckF;
       const div=document.createElement('div');
-      div.className='h-card'+(c.type==='Disturbance'?' dis':'')+(inArc?' in-arc':'')+(hidden?' hidden':'');
+      div.className='h-card cat-'+c.type+(inArc?' in-arc':'')+(hidden?' hidden':'');
       div.innerHTML=cardHTML(c);
       div.draggable=!inArc;
-      div.ondragstart=e=>{e.dataTransfer.setData('cid',c.id);};
+      div.ondragstart=e=>e.dataTransfer.setData('cid',c.id);
       div.onclick=()=>{if(!inArc)placeFromDeck(c.id);};
       dg.appendChild(div);
     });
@@ -1603,7 +1518,7 @@ function render(){
   const dp=Math.max(0,deckDP());
   document.getElementById('dp-fill').style.width=Math.min(100,(dp/100)*100)+'%';
   document.getElementById('dp-lbl').textContent=`${dp} / 100 DP`;
-  document.getElementById('deck-count').textContent=deck.length;
+  document.getElementById('deck-cnt').textContent=deck.length;
 
   /* BASE SET */
   const deckIds=deck.map(c=>c.id);
@@ -1611,317 +1526,172 @@ function render(){
   bg.innerHTML='';
   ALL.forEach(c=>{
     const inDeck=deckIds.includes(c.id);
-    const hidden=baseFilter!=='All'&&c.type!==baseFilter;
+    const hidden=baseF!=='All'&&c.type!==baseF;
     const div=document.createElement('div');
-    div.className='h-card'+(c.type==='Disturbance'?' dis':'')+(inDeck?' in-deck-dim':'')+(hidden?' hidden':'');
+    div.className='h-card cat-'+c.type+(inDeck?' in-deck-dim':'')+(hidden?' hidden':'');
     div.innerHTML=cardHTML(c);
     div.onclick=()=>{if(!inDeck)addToDeck(c.id);};
     bg.appendChild(div);
   });
 }
-
 function refresh(){render();}
 
-function buildFilterRow(id,getF,setF){
+/* ── FILTERS ── */
+function buildFR(id,getF,setF){
   const row=document.getElementById(id);
   CATS.forEach(cat=>{
     const b=document.createElement('button');
-    b.className='filter-btn'+(cat==='All'?' active':'');
+    b.className='fbtn'+(cat==='All'?' active':'');
     b.textContent=cat;
-    b.onclick=()=>{setF(cat);row.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');render();};
+    b.onclick=()=>{setF(cat);row.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');render();};
     row.appendChild(b);
   });
 }
 
+/* ── TRANSITION REF ── */
 function buildTransGrid(){
   const g=document.getElementById('trans-grid');
+  g.innerHTML='';
   TRANS.forEach(({f,t,e})=>{
-    const div=document.createElement('div');
-    div.className='trans-row';
-    div.innerHTML=`<span class="trans-from">${f}</span><span class="trans-arrow">&rarr;</span><span class="trans-to">${t}</span><span class="trans-echo">${e}</span>`;
-    g.appendChild(div);
+    const d=document.createElement('div');d.className='tr-row';
+    d.innerHTML=`<span class="tr-from">${f}</span><span class="tr-arr">&rarr;</span><span class="tr-to">${t}</span><span class="tr-echo">${e}</span>`;
+    g.appendChild(d);
   });
 }
 
-buildFilterRow('deck-filter-row',()=>deckFilter,v=>{deckFilter=v;});
-buildFilterRow('base-filter-row',()=>baseFilter,v=>{baseFilter=v;});
-buildTransGrid();
-renderCT();
-render();
-
 /* ── HELP SYSTEM ── */
-const HELP_SECTIONS=[
-  {
-    id:'overview',
-    label:'Overview',
-    content:`
-      <h3>What is Oneirium?</h3>
-      <p>Oneirium is a 1v1 strategic card game of dream construction, emotional resonance, and narrative disruption. You are not fighting your opponent. You are building a dream while they try to unravel it.</p>
-      <p>You win by scoring more Coherence Points (CP) than your opponent by building a stable, emotionally resonant dream arc. Or by forcing your opponent's dream to collapse entirely.</p>
-      <h3>Core Concepts</h3>
-      <div class="help-rule">
-        <div class="help-rule-title">Dream Points (DP)</div>
-        <div class="help-rule-body">Your deck-building budget. Every card has a printed DP cost. Your deck total cannot exceed 100 DP. Disturbance cards have negative DP costs, refunding budget at the risk of instability.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Coherence Points (CP)</div>
-        <div class="help-rule-body">The scoring currency. Earned through base card values, tag synergies, emotional transitions, and endgame bonuses. Counted only at game end. Highest CP wins.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Coherence Track (CT)</div>
-        <div class="help-rule-body">A survival resource, not a scoring resource. Starts at 15. Tracks dream stability. Degrades when Disturbances land on your board. Collapse at zero means immediate loss.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Tags</div>
-        <div class="help-rule-body">Every card carries 1-2 tags: emotional, thematic, or symbolic descriptors. Tags are the engine of everything. Matching tags generate synergy. Evolving tags generate transitions.</div>
-      </div>
-    `
-  },
-  {
-    id:'scoring',
-    label:'Scoring',
-    content:`
-      <h3>Five Scoring Layers</h3>
-      <p>All scoring is calculated at game end. Layers apply in order.</p>
-      <div class="help-rule">
-        <div class="help-rule-title">Layer 1 &mdash; Base Card Values (1&ndash;3 CP each)</div>
-        <div class="help-rule-body">Every card scores its printed CP value regardless of any other conditions. A 10-year-old can understand this immediately.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Layer 2 &mdash; Tag Synergy (+1 CP per matching tag pair)</div>
-        <div class="help-rule-body">Any two cards on your board sharing a tag score +1 CP per pair. Stackable across the full board. Three cards all carrying Stillness = three pairs = +3 CP.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Layer 3 &mdash; Emotional Transitions (+3 CP each)</div>
-        <div class="help-rule-body">When a card with a From tag and a card with a To tag (from the Transition Pair List) are both on your board with at least one card between them, the transition completes for +3 CP.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Layer 4 &mdash; Full Arc Bonus (+5 CP, once)</div>
-        <div class="help-rule-body">Three or more completed transitions on your board at game end. The masterwork dream bonus. Rare and deeply satisfying.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Layer 5 &mdash; Discipline Endgame Bonus</div>
-        <div class="help-rule-body">Each discipline has one specific endgame condition scoring additional CP.</div>
-      </div>
-      <h3>Penalties &amp; Bonuses</h3>
-      <ul>
-        <li>Each unresolved Disturbance at game end: &minus;2 CP</li>
-        <li>Resilience Bonus: CT fell to Critical (1&ndash;4) then recovered to Stable (9+): +3 CP</li>
-        <li>Clean Track Bonus: CT at 15 when game ends: +2 CP</li>
-      </ul>
-    `
-  },
-  {
-    id:'transitions',
-    label:'Transitions',
-    content:`
-      <h3>How Transitions Work</h3>
-      <p>A transition completes when a card with the <strong style="color:var(--c-tension)">From</strong> tag and a card with the <strong style="color:var(--c-resolve)">To</strong> tag are both on your arc with <strong style="color:var(--teal-pale)">at least one card between them</strong>.</p>
-      <p>The bridging card can be anything. It represents the narrative journey between emotional states. Its own tags still contribute to synergy independently.</p>
-      <p>Each tag can only serve one transition at a time. A card with two tags can enable two different transitions using its two tags separately, but one tag cannot anchor two transitions simultaneously.</p>
-      <p>When a transition completes during play, its Echo effect triggers immediately.</p>
-      <h3>All 12 Transition Pairs</h3>
-      <div class="trans-ref" id="help-trans-ref"></div>
-    `
-  },
-  {
-    id:'ct',
-    label:'Coherence Track',
-    content:`
-      <h3>The Coherence Track</h3>
-      <p>The CT is a public survival resource. Both players' tracks are visible at all times. It is entirely separate from CP scoring.</p>
-      <p>Each Disturbance card has a printed CT drain value, applied immediately on placement. Removing a Disturbance restores the CT by that amount.</p>
-      <h3>CT Zones</h3>
-      <div class="help-rule">
-        <div class="help-rule-title" style="color:var(--ct-stable)">Stable &mdash; 9 to 15</div>
-        <div class="help-rule-body">Normal play. No modifiers.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title" style="color:var(--ct-unstable)">Unstable &mdash; 5 to 8</div>
-        <div class="help-rule-body">Maximum 1 card played per turn. Opponent gains +1 CP when placing Disturbances against you.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title" style="color:var(--ct-critical)">Critical &mdash; 1 to 4</div>
-        <div class="help-rule-body">Unstable rules apply. If you recover back to Stable before game end, gain the Resilience Bonus (+3 CP).</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title" style="color:#ff4444">Collapse &mdash; 0</div>
-        <div class="help-rule-body">Immediate loss. The dream unravels into nightmare.</div>
-      </div>
-      <h3>Disturbance Drain Reference</h3>
-      <ul>
-        <li>Weak Disturbance (&minus;1 DP): &minus;1 CT on placement</li>
-        <li>Standard Disturbance (&minus;2 DP): &minus;2 CT on placement</li>
-        <li>Strong Disturbance (&minus;3 DP): &minus;3 to &minus;4 CT on placement</li>
-      </ul>
-    `
-  },
-  {
-    id:'cards',
-    label:'Card Types',
-    content:`
-      <h3>Card Types</h3>
-      <div class="help-rule">
-        <div class="help-rule-title">Emotion (1&ndash;3 DP)</div>
-        <div class="help-rule-body">Emotional tone. Can be played standalone in the arc row, or tucked under a card with an Emotion Slot. When tucked, it belongs entirely to the host card's position and does not take up its own row position. The choice is permanent.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Character (3&ndash;5 DP)</div>
-        <div class="help-rule-body">Dream figures with traits and synergy potential. Many carry an Emotion Slot (marked with a pink circle pip).</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Setting (3&ndash;5 DP)</div>
-        <div class="help-rule-body">Environments and locations. Provide strong tag anchors and often carry Emotion Slots.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Situation (2&ndash;4 DP)</div>
-        <div class="help-rule-body">Narrative events and turning points. Often have immediate card actions on play.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Object (2&ndash;4 DP)</div>
-        <div class="help-rule-body">Symbolic or functional dream items. Flexible synergy connectors.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Resolution (3&ndash;6 DP)</div>
-        <div class="help-rule-body">Clears Disturbances and can restore CT. Essential for managing your track.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Disturbance (&minus;1 to &minus;3 DP)</div>
-        <div class="help-rule-body">Played into the opponent's arc. Drains their CT immediately on placement. Suppresses synergy or breaks transition chains. Max 2 on any board simultaneously (3 for the Dissonants discipline).</div>
-      </div>
-      <h3>Tag Families &amp; Colors</h3>
-      <div class="help-tag-row"><div class="help-tag-fam" style="color:var(--c-tension)">Tension</div><div class="help-tag-list">Fear, Anxiety, Dread, Grief, Shame, Loneliness, Anger, Despair, Tension, Dissonance, Disruption</div></div>
-      <div class="help-tag-row"><div class="help-tag-fam" style="color:var(--c-resolve)">Resolve</div><div class="help-tag-list">Courage, Hope, Clarity, Acceptance, Trust, Gratitude, Understanding</div></div>
-      <div class="help-tag-row"><div class="help-tag-fam" style="color:var(--c-warmth)">Warmth</div><div class="help-tag-list">Comfort, Joy, Nostalgia, Belonging, Warmth, Safety</div></div>
-      <div class="help-tag-row"><div class="help-tag-fam" style="color:var(--c-motion)">Motion</div><div class="help-tag-list">Curiosity, Wonder, Awe, Excitement, Exploration, Lightness</div></div>
-      <div class="help-tag-row"><div class="help-tag-fam" style="color:var(--c-still)">Stillness</div><div class="help-tag-list">Stillness, Silence, Peace, Release, Patience</div></div>
-      <div class="help-tag-row"><div class="help-tag-fam" style="color:var(--c-struct)">Structure</div><div class="help-tag-list">Logic, Process, Order, Control, Precision, Analysis</div></div>
-    `
-  },
-  {
-    id:'sandbox',
-    label:'Sandbox Status',
-    content:`
-      <h3>What this sandbox is</h3>
-      <p>This is a single-player design and scoring sandbox for Oneirium. Its purpose is to let you explore the card set, test dream arc combinations, and feel how the scoring and CT mechanics work in practice. It is not yet a full game.</p>
-      <h3>What works right now</h3>
-      <div class="help-rule">
-        <div class="help-rule-title">Full 60-card base set</div>
-        <div class="help-rule-body">All 60 base set cards are browsable and playable. Category filters let you navigate by type. Card actions are displayed on each card for reference, though they do not trigger automatically yet.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Deck building</div>
-        <div class="help-rule-body">Build Deck randomly assembles a legal deck within 100 DP with a minimum of 4 Disturbances. You can also manually add any card from the base set by tapping it. The DP bar tracks your budget in real time.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Dream Arc placement</div>
-        <div class="help-rule-body">Tap any deck card once to place it in the arc. Tap an arc card to remove it. Desktop: drag cards directly. Up to 12 cards per arc.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Live scoring</div>
-        <div class="help-rule-body">All five scoring layers calculate in real time as you build: base CP, tag synergy pairs, emotional transitions (+3 CP each), the Full Arc Bonus (+5 CP for three or more transitions), and Disturbance CP penalties. Completed transitions and active synergies are shown as hint badges below the arc.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Coherence Track</div>
-        <div class="help-rule-body">The CT starts at 15 and drains immediately when a Disturbance lands in the arc. Zone indicators (Stable, Unstable, Critical, Collapse) update in real time. Removing a Disturbance restores CT. The Resolve button simulates a Resolution card restoring +2 CT. Collapse at zero triggers the dream collapse screen.</div>
-      </div>
-      <div class="help-rule">
-        <div class="help-rule-title">Transition detection</div>
-        <div class="help-rule-body">All 12 transition pairs are detected automatically. Each tag can only serve one transition at a time. A card with two tags can enable two different transitions through its two tags independently.</div>
-      </div>
-      <h3>What is not yet built</h3>
-      <ul>
-        <li>Opponent board and two-player mode</li>
-        <li>Turn structure and turn limits</li>
-        <li>Card actions triggering automatically (Emotion Slot attachment, draw effects, CT restoration on play, etc.)</li>
-        <li>Disturbance placement on an opponent's board</li>
-        <li>Resolution card mechanics (removing Disturbances)</li>
-        <li>Discipline passives and endgame bonuses</li>
-        <li>Hand management and draw mechanics</li>
-        <li>Resilience Bonus and Clean Track Bonus tracking</li>
-      </ul>
-      <h3>What comes next</h3>
-      <p>The next planned step is opponent board and basic two-player turn structure. Once that is in place, Disturbance placement, Resolution mechanics, and card actions will follow. The full digital MVP will be built in Claude Code as a proper multi-file project.</p>
-    `
-  },
-  {
-    id:'deck',
-    label:'Deck Building',
-    content:`
-      <h3>Building Your Deck</h3>
-      <ul>
-        <li>Exactly 30 cards per deck</li>
-        <li>Maximum 100 DP total budget</li>
-        <li>At least 4 Disturbance cards required (maximum 10)</li>
-        <li>Disturbances refund DP, letting you afford stronger cards elsewhere</li>
-      </ul>
-      <h3>Recommended Composition</h3>
-      <div class="help-rule">
-        <div class="help-rule-body">Emotions: 8&ndash;10 &nbsp;&middot;&nbsp; Characters: 4&ndash;6 &nbsp;&middot;&nbsp; Situations: 4&ndash;5 &nbsp;&middot;&nbsp; Settings: 3&ndash;4 &nbsp;&middot;&nbsp; Objects: 2&ndash;3 &nbsp;&middot;&nbsp; Resolutions: 3&ndash;4 &nbsp;&middot;&nbsp; Disturbances: 4&ndash;10</div>
-      </div>
-      <h3>What Happens Without Balance</h3>
-      <ul>
-        <li>Too few Emotions: low CP ceiling, transitions hard to build</li>
-        <li>Too many Disturbances: slow board development, hand full of attack cards early</li>
-        <li>Too few Resolutions: fragile CT, vulnerable to Disturbance pressure</li>
-      </ul>
-      <h3>Budget Math</h3>
-      <p>6 Disturbances at &minus;2 DP average = 12 DP refunded. Effective purchasing power for remaining 24 cards: 112 DP. This is the Disturbance economy: invite chaos, afford power.</p>
-    `
-  },
+const HELP=[
+  {label:'Overview',content:`
+    <h3>What is Oneirium?</h3>
+    <p>A 1v1 strategic card game of dream construction, emotional resonance, and narrative disruption. You are not fighting your opponent. You are building a dream while they try to unravel it.</p>
+    <p>You win by scoring more Coherence Points (CP) than your opponent, or by forcing their dream to collapse entirely.</p>
+    <h3>Core Concepts</h3>
+    <div class="h-rule"><div class="h-rule-t">Dream Points (DP)</div><div class="h-rule-b">Deck-building budget. Every card has a DP cost. Deck total cannot exceed 100 DP. Disturbances have negative DP costs.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Coherence Points (CP)</div><div class="h-rule-b">The scoring currency. Counted only at game end. Highest CP wins.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Coherence Track (CT)</div><div class="h-rule-b">Survival resource, not scoring. Starts at 15. Drains when Disturbances land. Collapse at zero = immediate loss.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Tags</div><div class="h-rule-b">Every card carries 1&ndash;2 tags. Matching tags generate synergy. Evolving tags generate transitions. Tags are the engine of everything.</div></div>
+  `},
+  {label:'Scoring',content:`
+    <h3>Five Scoring Layers</h3>
+    <div class="h-rule"><div class="h-rule-t">Layer 1 &mdash; Base Card Values (1&ndash;3 CP each)</div><div class="h-rule-b">Every card scores its printed CP regardless of other conditions.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Layer 2 &mdash; Tag Synergy (+1 CP per matching tag pair)</div><div class="h-rule-b">Two cards sharing a tag = +1 CP per pair. Stackable across the board.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Layer 3 &mdash; Emotional Transitions (+3 CP each)</div><div class="h-rule-b">From tag card + To tag card on arc, with at least one card between them.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Layer 4 &mdash; Full Arc Bonus (+5 CP, once)</div><div class="h-rule-b">Three or more completed transitions at game end.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Layer 5 &mdash; Discipline Endgame Bonus</div><div class="h-rule-b">Each discipline has one specific endgame condition.</div></div>
+    <h3>Penalties &amp; Bonuses</h3>
+    <ul>
+      <li>Each unresolved Disturbance at game end: &minus;2 CP</li>
+      <li>Resilience Bonus (CT fell to Critical then recovered to Stable): +3 CP</li>
+      <li>Clean Track Bonus (CT at 15 at game end): +2 CP</li>
+    </ul>
+  `},
+  {label:'Transitions',content:`
+    <h3>How Transitions Work</h3>
+    <p>A transition completes when a card with the <strong style="color:var(--c-tension)">From</strong> tag and a card with the <strong style="color:var(--c-resolve)">To</strong> tag are both on your arc with <strong style="color:var(--teal-pale)">at least one card between them</strong>. That middle card can be anything.</p>
+    <p>Each tag can only serve one transition at a time. A card with two tags can enable two different transitions through its two different tags, but one tag cannot anchor two transitions simultaneously.</p>
+    <h3>All 12 Transition Pairs</h3>
+    <div class="h-trans-ref" id="h-trans-ref"></div>
+  `},
+  {label:'Coherence Track',content:`
+    <h3>The Coherence Track</h3>
+    <p>Starts at 15. Drains immediately when a Disturbance is placed. Removing a Disturbance restores the CT by its drain value.</p>
+    <div class="h-rule"><div class="h-rule-t" style="color:var(--ct-stable)">Stable &mdash; 9 to 15</div><div class="h-rule-b">Normal play. No modifiers.</div></div>
+    <div class="h-rule"><div class="h-rule-t" style="color:var(--ct-unstable)">Unstable &mdash; 5 to 8</div><div class="h-rule-b">Max 1 card per turn. Opponent gains +1 CP when placing Disturbances against you.</div></div>
+    <div class="h-rule"><div class="h-rule-t" style="color:var(--ct-critical)">Critical &mdash; 1 to 4</div><div class="h-rule-b">Unstable rules apply. Recover to Stable before game end for +3 CP Resilience Bonus.</div></div>
+    <div class="h-rule"><div class="h-rule-t" style="color:#ff4444">Collapse &mdash; 0</div><div class="h-rule-b">Immediate loss. The dream unravels.</div></div>
+  `},
+  {label:'Card Types',content:`
+    <h3>Types &amp; Category Colors</h3>
+    <div class="h-rule"><div class="h-rule-t"><span class="cat-swatch" style="background:var(--card-emotion)"></span>Emotion (1&ndash;3 DP)</div><div class="h-rule-b">Emotional tone. Played standalone in the arc row, or tucked under an Emotion Slot card. Choice is permanent. Does not occupy a row position when tucked.</div></div>
+    <div class="h-rule"><div class="h-rule-t"><span class="cat-swatch" style="background:var(--card-character)"></span>Character (3&ndash;5 DP)</div><div class="h-rule-b">Dream figures. Many carry an Emotion Slot (pink circle pip on the card).</div></div>
+    <div class="h-rule"><div class="h-rule-t"><span class="cat-swatch" style="background:var(--card-setting)"></span>Setting (3&ndash;5 DP)</div><div class="h-rule-b">Environments and locations. Strong tag anchors.</div></div>
+    <div class="h-rule"><div class="h-rule-t"><span class="cat-swatch" style="background:var(--card-situation)"></span>Situation (2&ndash;4 DP)</div><div class="h-rule-b">Narrative events. Often have immediate actions on play.</div></div>
+    <div class="h-rule"><div class="h-rule-t"><span class="cat-swatch" style="background:var(--card-object)"></span>Object (2&ndash;4 DP)</div><div class="h-rule-b">Symbolic or functional items. Flexible synergy connectors.</div></div>
+    <div class="h-rule"><div class="h-rule-t"><span class="cat-swatch" style="background:var(--card-resolution)"></span>Resolution (3&ndash;6 DP)</div><div class="h-rule-b">Clears Disturbances and can restore CT.</div></div>
+    <div class="h-rule"><div class="h-rule-t"><span class="cat-swatch" style="background:var(--card-disturbance)"></span>Disturbance (&minus;1 to &minus;3 DP)</div><div class="h-rule-b">Played into the opponent's arc. Drains CT immediately on placement. Max 2 on any board simultaneously.</div></div>
+    <h3>Tag Family Colors</h3>
+    <div class="h-tag-row"><div class="h-tag-fam" style="color:var(--c-tension)">Tension</div><div class="h-tag-list">Fear, Anxiety, Dread, Grief, Shame, Loneliness, Anger, Despair, Tension, Dissonance, Disruption</div></div>
+    <div class="h-tag-row"><div class="h-tag-fam" style="color:var(--c-resolve)">Resolve</div><div class="h-tag-list">Courage, Hope, Clarity, Acceptance, Trust, Gratitude, Understanding</div></div>
+    <div class="h-tag-row"><div class="h-tag-fam" style="color:var(--c-warmth)">Warmth</div><div class="h-tag-list">Comfort, Joy, Nostalgia, Belonging, Warmth, Safety</div></div>
+    <div class="h-tag-row"><div class="h-tag-fam" style="color:var(--c-motion)">Motion</div><div class="h-tag-list">Curiosity, Wonder, Awe, Excitement, Exploration, Lightness</div></div>
+    <div class="h-tag-row"><div class="h-tag-fam" style="color:var(--c-still)">Stillness</div><div class="h-tag-list">Stillness, Silence, Peace, Release, Patience</div></div>
+    <div class="h-tag-row"><div class="h-tag-fam" style="color:var(--c-struct)">Structure</div><div class="h-tag-list">Logic, Process, Order, Control, Precision, Analysis</div></div>
+  `},
+  {label:'Deck Building',content:`
+    <h3>Building Your Deck</h3>
+    <ul>
+      <li>Exactly 30 cards, maximum 100 DP total</li>
+      <li>At least 4 Disturbance cards required (maximum 10)</li>
+      <li>Disturbances refund DP budget, letting you afford stronger cards</li>
+    </ul>
+    <h3>Recommended Composition</h3>
+    <div class="h-rule"><div class="h-rule-b">Emotions: 8&ndash;10 &middot; Characters: 4&ndash;6 &middot; Situations: 4&ndash;5 &middot; Settings: 3&ndash;4 &middot; Objects: 2&ndash;3 &middot; Resolutions: 3&ndash;4 &middot; Disturbances: 4&ndash;10</div></div>
+    <ul>
+      <li>Too few Emotions: low CP ceiling</li>
+      <li>Too many Disturbances: slow board development</li>
+      <li>Too few Resolutions: fragile CT</li>
+    </ul>
+  `},
+  {label:'Sandbox Status',content:`
+    <h3>What works right now</h3>
+    <div class="h-rule"><div class="h-rule-t">Full 60-card base set</div><div class="h-rule-b">All 60 cards browsable and playable. Category filters and colour-coded backgrounds by card type.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Deck building</div><div class="h-rule-b">Build Deck randomly assembles a legal deck within 100 DP. Manual card addition also supported.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Live scoring</div><div class="h-rule-b">All five scoring layers calculate in real time: base CP, tag synergy, transitions (+3 CP each), Full Arc Bonus (+5), Disturbance penalties. Each tag can only serve one transition at a time.</div></div>
+    <div class="h-rule"><div class="h-rule-t">Coherence Track</div><div class="h-rule-b">Starts at 15. Drains on Disturbance placement. Zone indicators update in real time. Collapse at zero. Disturbance tags contribute to transitions when on your arc.</div></div>
+    <h3>Not yet built</h3>
+    <ul>
+      <li>Opponent board and two-player turn structure</li>
+      <li>Card actions triggering automatically</li>
+      <li>Resolution card mechanics (removing Disturbances from arc)</li>
+      <li>Discipline passives and endgame bonuses</li>
+      <li>Hand management and draw mechanics</li>
+    </ul>
+    <h3>What comes next</h3>
+    <p>Opponent board and basic two-player turn structure. Then Disturbance placement on the opponent's arc. Then the full MVP in Claude Code as a proper multi-file project.</p>
+  `},
 ];
 
-let activeHelpTab=0;
-
-function buildHelpSystem(){
+let helpTab=0;
+function buildHelp(){
   const tabs=document.getElementById('help-tabs');
   const body=document.getElementById('help-body');
-  HELP_SECTIONS.forEach((sec,i)=>{
+  HELP.forEach((s,i)=>{
     const btn=document.createElement('button');
     btn.className='help-tab'+(i===0?' active':'');
-    btn.textContent=sec.label;
-    btn.onclick=()=>switchHelpTab(i);
+    btn.textContent=s.label;
+    btn.onclick=()=>switchTab(i);
     tabs.appendChild(btn);
     const panel=document.createElement('div');
     panel.className='help-panel'+(i===0?' active':'');
-    panel.id='help-panel-'+i;
-    panel.innerHTML=sec.content;
+    panel.innerHTML=s.content;
     body.appendChild(panel);
   });
-  // populate transition reference in transitions panel
-  const ref=document.getElementById('help-trans-ref');
+  /* populate transition reference inside help */
+  const ref=document.getElementById('h-trans-ref');
   if(ref){
     TRANS.forEach(({f,t,e})=>{
-      const div=document.createElement('div');
-      div.className='trans-ref-row';
-      div.innerHTML=`<span class="tr-from">${f}</span><span class="tr-arr">&rarr;</span><span class="tr-to">${t}</span><span class="tr-echo">${e}</span>`;
-      ref.appendChild(div);
+      const d=document.createElement('div');d.className='h-tr-row';
+      d.innerHTML=`<span class="h-tr-f">${f}</span><span class="h-tr-a">&rarr;</span><span class="h-tr-t">${t}</span><span class="h-tr-e">${e}</span>`;
+      ref.appendChild(d);
     });
   }
 }
-
-function switchHelpTab(idx){
-  activeHelpTab=idx;
-  document.querySelectorAll('.help-tab').forEach((b,i)=>b.classList.toggle('active',i===idx));
-  document.querySelectorAll('.help-panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
+function switchTab(i){
+  helpTab=i;
+  document.querySelectorAll('.help-tab').forEach((b,j)=>b.classList.toggle('active',j===i));
+  document.querySelectorAll('.help-panel').forEach((p,j)=>p.classList.toggle('active',j===i));
 }
+function openHelp(i){switchTab(i||0);document.getElementById('help-ov').classList.add('active');document.body.style.overflow='hidden';}
+function closeHelp(){document.getElementById('help-ov').classList.remove('active');document.body.style.overflow='';}
+function helpOvClick(e){if(e.target===document.getElementById('help-ov'))closeHelp();}
 
-function openHelp(tabIdx){
-  switchHelpTab(tabIdx||0);
-  document.getElementById('help-overlay').classList.add('active');
-  document.body.style.overflow='hidden';
-}
-
-function closeHelpBox(){
-  document.getElementById('help-overlay').classList.remove('active');
-  document.body.style.overflow='';
-}
-
-function closeHelp(e){
-  if(e.target===document.getElementById('help-overlay')) closeHelpBox();
-}
-
-buildHelpSystem();
+/* ── INIT ── */
+buildFR('deck-fr',()=>deckF,v=>{deckF=v;});
+buildFR('base-fr',()=>baseF,v=>{baseF=v;});
+buildTransGrid();
+buildHelp();
+renderCT();
+render();
 </script>
 
 
