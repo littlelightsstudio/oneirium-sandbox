@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0109)file:///Users/miso/Little%20Lights%20Studio%20Dropbox/Michael%20Sokolar/Mac/Downloads/oneirium-sandbox_9.html -->
+<!-- saved from url=(0110)file:///Users/miso/Little%20Lights%20Studio%20Dropbox/Michael%20Sokolar/Mac/Downloads/oneirium-sandbox_10.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -3193,7 +3193,7 @@ function buildDiagramSVG(){
   <!-- CT BAR -->
   <text x="20" y="318" font-family="'Cinzel',serif" font-size="8" fill="#2db89a" opacity=".6" letter-spacing=".1em">COHERENCE TRACK — STABLE</text>
   <!-- 15 pips in a row -->
-  ${Array.from({length:15},(_,i)=>`<rect x="${20+i*32}" y="326" width="24" height="9" rx="2" fill="${i<13?'#2db89a':'rgba(255,255,255,0.07)'}" opacity="${i<13?.7:.4}"/>`).join('')}
+  ${(()=>{let s="";for(let i=0;i<15;i++){const f=i<13?"#2db89a":"rgba(255,255,255,0.07)";s+='<rect x="'+(20+i*32)+'" y="326" width="24" height="9" rx="2" fill="'+f+'" opacity="'+(i<13?0.7:0.4)+'"/>';}return s;})()}
   <text x="20" y="352" font-family="'Cinzel',serif" font-size="9" fill="#7ee8d0">13 / 15</text>
   <text x="70" y="352" font-family="'Crimson Pro',serif" font-size="9" fill="#8a7a9a" font-style="italic">· A Disturbance landed earlier, draining 2 CT. Dream remains stable.</text>
 
